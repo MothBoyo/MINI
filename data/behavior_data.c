@@ -6080,7 +6080,7 @@ const BehaviorScript bhvOnOffButton[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(onoffcol_collision),
-    SET_FLOAT(oDrawingDistance, 4000),
+    SET_FLOAT(oDrawingDistance, 10000),
     SET_FLOAT(oCollisionDistance, 500),
     SET_HOME(),
     BEGIN_LOOP(),
@@ -6101,5 +6101,18 @@ const BehaviorScript bhvOnOffBlock[] = {
     ADD_FLOAT(oPosY, 150),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_onoffblock),
+    END_LOOP(),
+};
+
+extern void bhv_noteblock(void);
+const BehaviorScript bhvNoteblock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(noteblock_collision),
+    SET_FLOAT(oDrawingDistance, 4000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_noteblock),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

@@ -37,3 +37,6 @@
 #include "onoffsolid/model.inc.c"
 #include "onoffhollow/model.inc.c"
 #include "onoffexclamation/model.inc.c"
+
+#include "noteblock/collision.inc.c"
+#include "noteblock/model.inc.c"

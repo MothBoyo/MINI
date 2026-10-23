@@ -201,6 +201,7 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_ONOFF_SOLID,             onoffsolid_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ONOFF_HOLLOW,            onoffhollow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ONOFF_EXCLAMATION,       onoffexclamation_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_NOTEBLOCK,               noteblock_geo),
     RETURN(),
 };
 
