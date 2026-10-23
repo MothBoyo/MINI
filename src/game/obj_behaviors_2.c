@@ -45,6 +45,7 @@
 #include "save_file.h"
 #include "seq_ids.h"
 #include "spawn_sound.h"
+#include "behaviors/mop.inc.c"
 
 //! HACKERSM64_DO: remove static
 

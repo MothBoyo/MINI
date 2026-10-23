@@ -16,3 +16,8 @@
 #include "water_splash/geo.inc.c"
 #include "sparkle_animation/geo.inc.c"
 #include "mario/geo.inc.c"
+
+#include "onoffswitch/geo.inc.c"
+#include "onoffsolid/geo.inc.c"
+#include "onoffhollow/geo.inc.c"
+#include "onoffexclamation/geo.inc.c"

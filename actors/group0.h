@@ -331,4 +331,10 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+#include "onoffswitch/geo_header.h"
+#include "onoffsolid/collision_header.h"
+#include "onoffsolid/geo_header.h"
+#include "onoffhollow/geo_header.h"
+#include "onoffexclamation/geo_header.h"
+
 #endif

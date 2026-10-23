@@ -30,3 +30,10 @@
 #include "src/s2d_engine/s2d_config.h"
 #include FONT_C_FILE
 #endif
+
+#include "onoffcol/collision.inc.c"
+#include "onoffswitch/model.inc.c"
+#include "onoffsolid/collision.inc.c"
+#include "onoffsolid/model.inc.c"
+#include "onoffhollow/model.inc.c"
+#include "onoffexclamation/model.inc.c"
