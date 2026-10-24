@@ -552,6 +552,8 @@ void bhv_yoshi_loop(void);
 void bhv_volcano_trap_loop(void);
 void bhv_hidden_collectible_loop(void);
 void bhv_switch_hidden_collectable_loop(void);
+void bhv_countdown_timer_loop(void);
+void bhv_countdown_timer_init(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

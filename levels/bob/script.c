@@ -54,6 +54,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_ONOFF_SWITCH, -1590, 0, -121, 0, 0, 0, (1 << 16), bhvOnOffButton),
 		OBJECT(MODEL_BLUE_COIN, 0, 104, -1701, 0, 0, 0, 0x00000000, bhvHiddenCollectable),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 0, 0, -1101, 0, 0, 0, (3 << 24), bhvHiddenCollectableSwitch),
+		OBJECT(MODEL_GOOMBA, 0, 100, 1500, 0, 0, 0, (10 << 16), bhvCountdownTimer),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),

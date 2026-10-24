@@ -545,5 +545,6 @@ extern const BehaviorScript bhvOnOffButton[];
 extern const BehaviorScript bhvNoteblock[];
 extern const BehaviorScript bhvHiddenCollectableSwitch[];
 extern const BehaviorScript bhvHiddenCollectable[];
+extern const BehaviorScript bhvCountdownTimer[];
 
 #endif // BEHAVIOR_DATA_H
