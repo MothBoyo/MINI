@@ -1,1 +1,1 @@
-#include "levels/bob/area_1/geo.inc.c"
+#include "levels/bob/area_0/geo.inc.c"
