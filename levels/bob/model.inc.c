@@ -1,14 +1,3 @@
-Vtx bob_dl_Plane_mesh_layer_1_vtx_cull[8] = {
-	{{ {-5816, -5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-5816, 5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-5816, 5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {-5816, -5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {5816, -5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {5816, 5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {5816, 5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-	{{ {5816, -5816, 0}, 0, {0, 0}, {0, 0, 0, 0} }},
-};
-
 Vtx bob_dl_Plane_mesh_layer_1_vtx_0[4] = {
 	{{ {-4670, 0, 4670}, 0, {-16, 1008}, {0, 127, 0, 255} }},
 	{{ {4670, 0, 4670}, 0, {1008, 1008}, {0, 127, 0, 255} }},
@@ -38,18 +27,10 @@ Gfx mat_revert_bob_dl_f3dlite_material[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx bob_dl_Plane_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(bob_dl_Plane_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+Gfx bob_dl_Plane_mesh_layer_1_with_revert[] = {
 	gsSPDisplayList(mat_bob_dl_f3dlite_material),
 	gsSPDisplayList(bob_dl_Plane_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_bob_dl_f3dlite_material),
-	gsSPEndDisplayList(),
-};
-
-Gfx bob_dl_final_revert_mesh_layer_1[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),

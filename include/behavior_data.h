@@ -543,5 +543,7 @@ extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvOnOffBlock[];
 extern const BehaviorScript bhvOnOffButton[];
 extern const BehaviorScript bhvNoteblock[];
+extern const BehaviorScript bhvHiddenCollectableSwitch[];
+extern const BehaviorScript bhvHiddenCollectable[];
 
 #endif // BEHAVIOR_DATA_H
