@@ -41,12 +41,12 @@ const LevelScript level_bob_entry[] = {
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
-	AREA(0, bob_area_0),
+	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(3, LEVEL_BOB, 0x02, 4, WARP_NO_CHECKPOINT),
-		MARIO_POS(0x00, 0, 0, 200, 0),
+		MARIO_POS(0x01, 0, 0, 200, 0),
 		OBJECT(MODEL_NOTEBLOCK, -1919, 250, -1591, 0, 0, 0, 0x00000000, bhvNoteblock),
 		OBJECT(MODEL_NONE, -2966, 0, 1379, 0, 0, 0, 0x00000000, bhvOnOffBlock),
 		OBJECT(MODEL_NONE, -2966, 0, -121, 0, 0, 0, (1 << 16), bhvOnOffBlock),
@@ -63,15 +63,15 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 0, 0, -1101, 0, 0, 0, (3 << 24), bhvHiddenCollectableSwitch),
 		OBJECT(MODEL_GOOMBA, 0, 100, 1500, 0, 0, 0, (10 << 16) | (1), bhvCountdownTimer),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
-		TERRAIN(bob_area_0_collision),
-		MACRO_OBJECTS(bob_area_0_macro_objs),
+		TERRAIN(bob_area_1_collision),
+		MACRO_OBJECTS(bob_area_1_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x00, 0, 0, 200, 0),
+	MARIO_POS(0x01, 0, 0, 200, 0),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
