@@ -1702,11 +1702,31 @@ static void queue_rumble_particles(struct MarioState *m) {
 #define queue_rumble_particles(m)
 #endif
 
+//powerup indexes
+#define NO_POWERUP 0
+
+#define POWERUP_PROPELLER 5
+
 /**
  * Main function for executing Mario's behavior. Returns particleFlags.
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
+
+
+  //take care of the models
+    //MARIO
+    switch (gMarioState->powerupState) {
+        case NO_POWERUP:
+            cur_obj_set_model(MODEL_MARIO);
+            break;
+        case POWERUP_PROPELLER:
+            cur_obj_set_model(MODEL_STAR);
+            break;                             
+    }
+    
+
+
 
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
@@ -1838,6 +1858,9 @@ void init_mario(void) {
 
     gMarioState->capTimer = 0;
     gMarioState->quicksandDepth = 0.0f;
+
+    //custom powerup
+    gMarioState->powerupState = 0;
 
     gMarioState->heldObj = NULL;
     gMarioState->riddenObj = NULL;

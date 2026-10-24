@@ -350,6 +350,7 @@ u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, 
 
     update_air_without_turn(m);
 
+
     stepResult = perform_air_step(m, stepArg);
     switch (stepResult) {
         case AIR_STEP_NONE:
@@ -882,6 +883,16 @@ s32 act_steep_jump(struct MarioState *m) {
 s32 act_ground_pound(struct MarioState *m) {
     u32 stepResult;
     f32 yOffset;
+
+    //powerup check propeller (not so good)
+    if (gMarioState->powerupState == 5) {
+        m->vel[1] = 80.0f;
+        play_mario_sound(m, SOUND_AIR_HOWLING_WIND, 0);
+        drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+        return FALSE;
+        
+    }
+
 
     play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
 

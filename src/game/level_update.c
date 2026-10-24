@@ -1216,7 +1216,50 @@ s32 update_level(void) {
 extern u32 gInitLevelTime;
 #endif
 
+//AREA DEPENDENT ACT WARPS
+#define ACT_AREA_NUM_ACTS      6     
+#define COURSE_ENTRY_WARP_NODE 0x0A //defualt
+
+// index = act - 1. 
+//0 = original warp dest
+static const u8 sActAreaTable[LEVEL_COUNT + 1][ACT_AREA_NUM_ACTS] = {
+    [LEVEL_BOB] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_WF]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_JRB] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_CCM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_BBH] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_HMC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_LLL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SSL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_DDD] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SL]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_WDW] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_TTM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_THI] = { 1, 2, 3, 3, 2, 1 },
+    [LEVEL_TTC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_RR]  = { 1, 1, 1, 1, 1, 1 },
+
+    // [LEVEL_XXX] = { ... },
+};
+
+static s16 get_area_for_act(s16 levelNum, s16 defaultArea) {
+    if (levelNum < 0 || levelNum > LEVEL_COUNT) return defaultArea; //to avoid death
+    if (gCurrActNum < 1 || gCurrActNum > ACT_AREA_NUM_ACTS) return defaultArea; //failsave
+
+    u8 area = sActAreaTable[levelNum][gCurrActNum - 1];
+    return (area != 0) ? area : defaultArea; //if 0, RETURN DEFAULT, IF NOT, TABLE
+}
+
+
+
 s32 init_level(void) {
+
+    //warp depending of that if change level and earp is 0x0A
+    if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL
+    && sWarpDest.nodeId == COURSE_ENTRY_WARP_NODE) {
+    sWarpDest.areaIdx = get_area_for_act(sWarpDest.levelNum, sWarpDest.areaIdx);
+    }
+
     s32 fadeFromColor = FALSE;
 
     set_play_mode(PLAY_MODE_NORMAL);
@@ -1403,3 +1446,8 @@ s32 lvl_play_the_end_screen_sound(UNUSED s16 initOrUpdate, UNUSED s32 levelNum) 
     play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
     return TRUE;
 }
+
+
+
+//CUSTOM FOR SILVER STARS
+u8 gStarDanceIsSilver = FALSE;

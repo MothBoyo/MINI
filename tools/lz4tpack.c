@@ -121,8 +121,8 @@ LZ4_FORCE_INLINE int LZ4HC_encodeSequence (
     const BYTE** _anchor,
     int matchLength,
     int offset,
-    limitedOutput_directive,
-    BYTE*)
+    limitedOutput_directive limitedOutputBuffer,
+    BYTE* oend)
 {
 #define ip      (*_ip)
 #define op      (*_op)

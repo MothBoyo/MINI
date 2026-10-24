@@ -608,7 +608,15 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     if (m->actionState == ACT_STATE_STAR_DANCE_CUTSCENE) {
         switch (++m->actionTimer) {
             case 1:
-                celebStar = spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+
+                //arg = 2 means silver star
+                if (m->actionArg & 2) {
+                    celebStar = spawn_object(m->marioObj, MODEL_SILVER_STAR, bhvCelebrationStar);
+                    }
+                //else caso normal    
+                else {
+                    celebStar = spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+                    }
 #ifdef STAR_DANCE_USES_STARS_MODEL
                 obj_set_model(celebStar, gStarModelLastCollected);
 #else
@@ -617,11 +625,18 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 }
 #endif
                 disable_background_sound();
-                //! HACKERSM64_DO: Is this check necessary? Both seem to do the exact same thing.
+                //! TODO: Is this check necessary? Both seem to do the exact same thing.
                 if (m->actionArg & 1) {
                     // No exit
                     play_course_clear(obj_has_model(celebStar, MODEL_BOWSER_KEY));
-                } else {
+
+                } 
+                else if (m->actionArg & 2) {
+                    //SEQ_EVENT_COLLECT_SILVER_STAR 
+                    play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0); //CHANGE SOND AT WILL
+                } 
+                else
+                {
                     // Exit
                     if (obj_has_model(celebStar, MODEL_BOWSER_KEY)) {
                         play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0);
@@ -636,9 +651,16 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 break;
 
             case 80:
+
+                //SILVER PLATE
+                if (m->actionArg & 2) { 
+                    m->actionState = ACT_STATE_STAR_DANCE_RETURN;
+                    break;
+                }
+
                 if (!(m->actionArg & 1)) {
-                    level_trigger_warp(m, WARP_OP_STAR_EXIT);
-                } else {
+                    level_trigger_warp(m, WARP_OP_STAR_EXIT);   
+                }  else {
                     enable_time_stop();
                     create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
                     m->actionState = ACT_STATE_STAR_DANCE_DO_SAVE;
@@ -651,8 +673,13 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
         }
         m->actionState = ACT_STATE_STAR_DANCE_RETURN;
     } else if (m->actionState == ACT_STATE_STAR_DANCE_RETURN && is_anim_at_end(m)) {
+
+        gStarDanceIsSilver = FALSE; //CUSTOM FOR SILVER STARS
+
         disable_time_stop();
         enable_background_sound();
+
+
         s32 dialogID = get_star_collection_dialog(m);
         if (dialogID) {
             // look up for dialog

@@ -551,6 +551,20 @@ void bhv_dust_smoke_loop(void);
 void bhv_yoshi_loop(void);
 void bhv_volcano_trap_loop(void);
 
+//custom functions here
+void bhv_onoffblock(void);
+void bhv_onoffswitch(void);
+void bhv_noteblock(void);
+
+void bhv_propeller_shroom_loop(void);
+
+//silver star related
+void bhv_hidden_silver_stars_star_init(void);
+void bhv_hidden_silver_stars_star_loop(void);
+void bhv_silver_star_init(void);
+void bhv_silver_star_loop(void);
+
+
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 
 // Bowser

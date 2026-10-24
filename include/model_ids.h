@@ -572,12 +572,16 @@
 #define MODEL_VCUTM_WARP_PIPE                     MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
-enum {
+enum { // :o
 MODEL_NOTEBLOCK = 255,
 MODEL_ONOFF_SWITCH = 256,
 MODEL_ONOFF_SOLID = 257,
 MODEL_ONOFF_HOLLOW = 258,
 MODEL_ONOFF_EXCLAMATION = 259,
 };
+
+
+#define MODEL_SILVER_STAR                        0x7A        // silver_star_geo //here put your custom star :3
+
 
 #endif // MODEL_IDS_H

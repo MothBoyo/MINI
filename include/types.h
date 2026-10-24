@@ -444,6 +444,9 @@ struct MarioState {
     /*0xC0*/ f32 quicksandDepth;
     /*0xC4*/ f32 windGravity;
     // -- HackerSM64 MarioState fields begin --
+
+ /*powerup*/ u8 powerupState; //custom powerups  
+ 
 #ifdef BREATH_METER
              s16 breath;
              u8  breathCounter;

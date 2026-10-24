@@ -4786,6 +4786,12 @@ s32 determine_dance_cutscene(UNUSED struct Camera *c) {
 #ifdef NON_STOP_STARS
     return CUTSCENE_DANCE_DEFAULT;
 #else
+
+    //CUSTOM FOR SILVER STARS
+    if (gStarDanceIsSilver) {
+        return CUTSCENE_DANCE_DEFAULT;
+    }
+
     u8 cutscene = CUTSCENE_NONE;
     u8 cutsceneIndex = 0;
     u8 starIndex = (gLastCompletedStarNum - 1) / 2;

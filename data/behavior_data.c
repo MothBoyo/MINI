@@ -6074,7 +6074,9 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-extern void bhv_onoffswitch(void);
+
+//custom behaviors start here
+
 extern const Collision onoffcol_collision[]; /* declare this */
 const BehaviorScript bhvOnOffButton[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -6089,7 +6091,6 @@ const BehaviorScript bhvOnOffButton[] = {
     END_LOOP(),
 };
 
-extern void bhv_onoffblock(void);
 const BehaviorScript bhvOnOffBlock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -6104,7 +6105,6 @@ const BehaviorScript bhvOnOffBlock[] = {
     END_LOOP(),
 };
 
-extern void bhv_noteblock(void);
 const BehaviorScript bhvNoteblock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -6114,5 +6114,45 @@ const BehaviorScript bhvNoteblock[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_noteblock),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+//propeller shroom
+const BehaviorScript bhvPropellerShroom[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    //LOAD_ANIMATIONS(oAnimations, fire_flower_anims),
+    //ANIMATE(0),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 30, /*Height*/ 30, /*Downwards offset*/ 0),
+    SET_FLOAT(oGraphYOffset, 30),
+    //CALL_NATIVE(bhv_1up_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_propeller_shroom_loop),
+    END_LOOP(),
+};
+
+//Silver Star Spawner
+const BehaviorScript bhvHiddenSilverStarsStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_hidden_silver_stars_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hidden_silver_stars_star_loop),
+    END_LOOP(),
+};
+
+//Silver Star (see bparams in silver_star.inc.c)
+const BehaviorScript bhvCollectableSilverStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_init_room),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_silver_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_silver_star_loop),
     END_LOOP(),
 };

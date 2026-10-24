@@ -1674,9 +1674,9 @@ u32 check_read_sign(struct MarioState *m, struct Object *obj) {
 #ifdef DIALOG_INDICATOR
         struct Object *orangeNumber;
         if (obj->behavior == segmented_to_virtual(bhvSignOnWall)) {
-            orangeNumber = spawn_object_relative(ORANGE_NUMBER_A, 0, 180, 32, obj, MODEL_NUMBER, bhvOrangeNumber);
+            orangeNumber = spawn_object_relative(ORANGE_NUMBER_B, 0, 180, 32, obj, MODEL_NUMBER, bhvOrangeNumber);
         } else {
-            orangeNumber = spawn_object_relative(ORANGE_NUMBER_A, 0, 160,  8, obj, MODEL_NUMBER, bhvOrangeNumber);
+            orangeNumber = spawn_object_relative(ORANGE_NUMBER_E + 1, 0, 160,  8, obj, MODEL_NUMBER, bhvOrangeNumber);
         }
         orangeNumber->oHomeX = orangeNumber->oPosX;
         orangeNumber->oHomeZ = orangeNumber->oPosZ;
@@ -1712,9 +1712,9 @@ u32 check_npc_talk(struct MarioState *m, struct Object *obj) {
 #ifdef DIALOG_INDICATOR
         struct Object *orangeNumber;
         if (obj->behavior == segmented_to_virtual(bhvYoshi)) {
-            orangeNumber = spawn_object_relative(ORANGE_NUMBER_A, 0, 256, 64, obj, MODEL_NUMBER, bhvOrangeNumber);
+            orangeNumber = spawn_object_relative(ORANGE_NUMBER_B, 0, 256, 64, obj, MODEL_NUMBER, bhvOrangeNumber);
         } else {
-            orangeNumber = spawn_object_relative(ORANGE_NUMBER_A, 0, 160,  0, obj, MODEL_NUMBER, bhvOrangeNumber);
+            orangeNumber = spawn_object_relative(ORANGE_NUMBER_D, 0, 160,  0, obj, MODEL_NUMBER, bhvOrangeNumber);
         }
         orangeNumber->oHomeX = orangeNumber->oPosX;
         orangeNumber->oHomeZ = orangeNumber->oPosZ;

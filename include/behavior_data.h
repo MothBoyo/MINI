@@ -540,8 +540,15 @@ extern const BehaviorScript bhvEndBirds1[];
 extern const BehaviorScript bhvEndBirds2[];
 extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
+
+//custom behaviors here
 extern const BehaviorScript bhvOnOffBlock[];
 extern const BehaviorScript bhvOnOffButton[];
 extern const BehaviorScript bhvNoteblock[];
+
+extern const BehaviorScript bhvPropellerShroom[];
+
+extern const BehaviorScript bhvHiddenSilverStarsStar[];
+extern const BehaviorScript bhvCollectableSilverStar[];
 
 #endif // BEHAVIOR_DATA_H
