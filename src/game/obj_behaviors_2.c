@@ -46,6 +46,7 @@
 #include "seq_ids.h"
 #include "spawn_sound.h"
 #include "behaviors/mop.inc.c"
+#include "behaviors/timed_collectable.inc.c"
 
 //! HACKERSM64_DO: remove static
 
