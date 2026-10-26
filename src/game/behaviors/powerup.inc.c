@@ -20,14 +20,6 @@ void bhv_propeller_shroom_loop(void) {
 
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x150);
 
-    //RETURN NORMAL MARIO AFTER 
-    if (gMarioState->action == ACT_STAR_DANCE_EXIT || 
-                gMarioState->action == ACT_STAR_DANCE_NO_EXIT || 
-                    gMarioState->action == ACT_STAR_DANCE_WATER ||
-                        gMarioState->action == ACT_FALL_AFTER_STAR_GRAB) {
-            gMarioState->powerupState = 0;
-    }
-
     switch (o->oAction) {
 
         case POWERUP_WAIT:  
