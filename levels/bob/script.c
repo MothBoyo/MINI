@@ -41,13 +41,19 @@ const LevelScript level_bob_entry[] = {
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
-	AREA(0, bob_area_0),
+	AREA(1, bob_area_0),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(3, LEVEL_BOB, 0x02, 4, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x00, 0, 0, 200, 0),
 		OBJECT(MODEL_NOTEBLOCK, -1919, 250, -1591, 0, 0, 0, 0x00000000, bhvNoteblock),
+		OBJECT(MODEL_PURPLE_SWITCH, -2319, 0, -1591, 0, 0, 0, 0x00000000, bhvFloorStarSwitch),
+		OBJECT(MODEL_PURPLE_SWITCH, -2619, 0, -1591, 0, 0, 0, 0x00000000, bhvFlipswitch),
+		OBJECT(MODEL_PURPLE_SWITCH, -2819, 0, -1591, 0, 0, 0, 0x00000000, bhvFlipswitch),
+		OBJECT(MODEL_PURPLE_SWITCH, -3119, 0, -1591, 0, 0, 0, 0x00000000, bhvFlipswitch),
+		OBJECT(MODEL_NONE, -3119, 0, 599, 0, 0, 0, 0x00030000, bhvFlipswitchManager),
+		OBJECT(MODEL_STAR, -2319, 400, 1091, 0, 0, 0, 0x00000000, bhvStarHiddenBySwitch),
 		OBJECT(MODEL_NONE, -2966, 0, 1379, 0, 0, 0, 0x00000000, bhvOnOffBlock),
 		OBJECT(MODEL_NONE, -2966, 0, -121, 0, 0, 0, (1 << 16), bhvOnOffBlock),
 		OBJECT(MODEL_ONOFF_SWITCH, -1590, 0, 1379, 0, 0, 0, 0x00000000, bhvOnOffButton),
@@ -63,6 +69,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 0, 0, -1101, 0, 0, 0, (3 << 24), bhvHiddenCollectableSwitch),
 		OBJECT(MODEL_GOOMBA, 0, 100, 1500, 0, 0, 0, (10 << 16) | (1), bhvCountdownTimer),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
+		//OBJECT(MODEL_BLUE_COIN, 0, 600, 0, 0, 180, 0, 0x00003001, bhvCountdownTimer),
 		TERRAIN(bob_area_0_collision),
 		MACRO_OBJECTS(bob_area_0_macro_objs),
 		STOP_MUSIC(0),

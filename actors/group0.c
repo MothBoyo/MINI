@@ -40,3 +40,7 @@
 
 #include "noteblock/collision.inc.c"
 #include "noteblock/model.inc.c"
+#include "star_switch/collision.inc.c"
+#include "star_switch/model.inc.c"
+#include "shrinking_platform/collision.inc.c"
+#include "shrinking_platform/model.inc.c"

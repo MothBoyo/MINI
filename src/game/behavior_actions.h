@@ -569,6 +569,15 @@ void bhv_hidden_silver_stars_star_loop(void);
 void bhv_silver_star_init(void);
 void bhv_silver_star_loop(void);
 
+//star switch related
+void bhv_star_hidden_by_switch_loop(void);
+void bhv_flipswitch_init(void);
+void bhv_flipswitch_loop(void);
+void bhv_flipswitch_manager_init(void);
+void bhv_flipswitch_manager_loop(void);
+
+void bhv_rainbow_star_loop(void);
+void star_shrink_platform_loop(void);
 
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);

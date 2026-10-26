@@ -204,3 +204,65 @@ void bhv_hidden_red_coin_star_loop(void) {
             break;
     }
 }
+
+
+
+#define SWITCH_STAR_STATE_HIDDEN 0
+#define SWITCH_STAR_STATE_TICKING 1
+//custom hidden star by switch
+//star_switch star
+void bhv_star_hidden_by_switch_loop(void) {
+    struct Object *switchObj;
+
+    switch (o->oAction) {
+
+        //HIDDEN
+        case SWITCH_STAR_STATE_HIDDEN:
+            cur_obj_disable_rendering();
+            cur_obj_become_intangible();
+            o->header.gfx.scale[0] = 0.0f;
+            o->header.gfx.scale[1] = 0.0f;
+            o->header.gfx.scale[2] = 0.0f;
+
+            if (o->oHiddenObjectSwitchObj == NULL) {
+                o->oHiddenObjectSwitchObj =
+                    cur_obj_nearest_object_with_behavior(
+                        bhvFloorStarSwitch);
+            }
+
+            switchObj = o->oHiddenObjectSwitchObj;
+
+            if (switchObj && switchObj->oAction == PURPLE_SWITCH_ACT_TICKING) {
+                o->oAction = SWITCH_STAR_STATE_TICKING;
+                cur_obj_enable_rendering();
+                cur_obj_unhide();
+                cur_obj_become_tangible();
+                cur_obj_play_sound_2(SOUND_GENERAL_STAR_APPEARS);
+                spawn_mist_particles();
+            }
+            break;
+
+        //ACTIVE
+        case SWITCH_STAR_STATE_TICKING:
+            bhv_collect_star_loop();
+
+            if ( o->header.gfx.scale[0] < 1.0f){
+                o->header.gfx.scale[0] = o->header.gfx.scale[0] + 0.08f;
+                o->header.gfx.scale[1] = o->header.gfx.scale[1] + 0.08f;
+                o->header.gfx.scale[2] = o->header.gfx.scale[2] + 0.08f;
+            } else {
+                o->header.gfx.scale[0] = 1.0f;
+                o->header.gfx.scale[1] = 1.0f;
+                o->header.gfx.scale[2] = 1.0f;
+            }
+
+
+
+            if (cur_obj_wait_then_blink(360, 20)) {
+                cur_obj_play_sound_2(SOUND_GENERAL_STAR_APPEARS);
+                spawn_mist_particles();
+                 o->oAction = SWITCH_STAR_STATE_HIDDEN; 
+            }
+
+    }
+}

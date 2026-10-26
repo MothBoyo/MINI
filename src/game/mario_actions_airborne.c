@@ -17,6 +17,8 @@
 
 #include "config.h"
 
+#define POWERUP_RAINBOW 10 
+
 void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
     s32 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
     if (animFrame == frame1 || animFrame == frame2 || animFrame == frame3) {
@@ -434,6 +436,29 @@ s32 act_jump(struct MarioState *m) {
     common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SINGLE_JUMP,
                            AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
     return FALSE;
+
+    //CUSTOM RAINBOW STAR 
+    if (m->powerupState == POWERUP_RAINBOW) { //RAINBOW
+        if (m->forwardVel > 50.0f) {
+            play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP,
+                             SOUND_MARIO_YAHOO_WAHA_YIPPEE + ((gAudioRandom % 5) << 16));
+            common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_FORWARD_SPINNING,
+                                   AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
+            m->marioObj->header.gfx.animInfo.animAccel = 0x15000;
+        } else {
+            play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
+            common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SINGLE_JUMP,
+                                   AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
+        }
+    } else { //NORMAL
+        play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
+        common_air_action_step(m, ACT_JUMP_LAND, MARIO_ANIM_SINGLE_JUMP,
+                               AIR_STEP_CHECK_LEDGE_GRAB | AIR_STEP_CHECK_HANG);
+    }
+
+
+
+
 }
 
 s32 act_double_jump(struct MarioState *m) {

@@ -40,10 +40,18 @@ struct LandingAction     sBackflipLandAction = {         4,               0,    
 
 Mat4 sFloorAlignMatrix[2];
 
+#define POWERUP_RAINBOW 10 //10
+
 s16 tilt_body_running(struct MarioState *m) {
+
+    if ((m->powerupState == POWERUP_RAINBOW)) {
+        return 0;   
+    }
     s16 pitch = find_floor_slope(m, 0);
     pitch = pitch * m->forwardVel / 40.0f;
     return -pitch;
+    
+
 }
 
 void play_step_sound(struct MarioState *m, s16 frame1, s16 frame2) {
@@ -425,7 +433,18 @@ void update_walking_speed(struct MarioState *m) {
         maxTargetSpeed = 32.0f;
     }
 
-    targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
+    //rainbow
+    if (m->powerupState == POWERUP_RAINBOW) {
+        maxTargetSpeed = 800.0f;
+    }    
+
+    //CUSTOM RAINBOW STAR function highly affected by that
+    if (m->powerupState != POWERUP_RAINBOW) {
+        targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed; //NORMAL
+    } else {
+        targetSpeed = (m->intendedMag * 3) < maxTargetSpeed ? (m->intendedMag * 3) : maxTargetSpeed; //RAINBOW MARIO
+    }
+    
 
     if (m->quicksandDepth > 10.0f) {
         targetSpeed *= 6.25f / m->quicksandDepth;
@@ -436,13 +455,23 @@ void update_walking_speed(struct MarioState *m) {
         m->forwardVel += 1.1f;
     } else if (m->forwardVel <= targetSpeed) {
         // If accelerating
-        m->forwardVel += 1.1f - m->forwardVel / 43.0f;
+        if (m->powerupState != POWERUP_RAINBOW) {
+            m->forwardVel += 1.1f - m->forwardVel / 43.0f; //NORMAL
+        } else {
+            m->forwardVel += 1.6f - m->forwardVel / 100.0f; //RAINBOW MARIO
+        }
     } else if (m->floor->normal.y >= 0.95f) {
         m->forwardVel -= 1.0f;
     }
 
-    if (m->forwardVel > 48.0f) {
-        m->forwardVel = 48.0f;
+    if (m->powerupState != POWERUP_RAINBOW) {
+        if (m->forwardVel > 48.0f) { //NORMAL
+            m->forwardVel = 48.0f;
+        }
+    } else {
+        if (m->forwardVel > 500.0f) { //RAINBOW MARIO
+            m->forwardVel = 500.0f;
+        }
     }
 
 #ifdef VELOCITY_BASED_TURN_SPEED
@@ -588,8 +617,21 @@ void anim_and_audio_for_walk(struct MarioState *m) {
                         m->actionTimer = WALK_SPEED_WALKING;
                     } else {
                         //! (Speed Crash) If Mario's speed is more than 2^17.
+                        //animSpeed = (s32)(intendedSpeed / 4.0f * 0x10000);
+                        //set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, animSpeed);
+
+                        //CUSTOM RAINBOW STAR //&& (m->flags & MARIO_RAINBOW)
+                        if ((m->forwardVel > 65.0f) && (m->powerupState == POWERUP_RAINBOW)) {
+                            animSpeed = (s32)(intendedSpeed / 7.0f * 0x10000);
+                            gBodyStates->handState = MARIO_HAND_OPEN;
+                            //flip replaced with fast running animation
+                            set_mario_anim_with_accel(m, MARIO_ANIM_FORWARD_FLIP, animSpeed);
+                            
+                        } else {
                         animSpeed = (s32)(intendedSpeed / 4.0f * 0x10000);
-                        set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, animSpeed);
+                        set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, animSpeed); 
+                        }           
+
                         play_step_sound(m, 9, 45);
                         targetPitch = tilt_body_running(m);
 

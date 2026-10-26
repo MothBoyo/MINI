@@ -1,0 +1,15 @@
+extern const GeoLayout star_switch_geo[];
+extern u8 star_switch_border2_ci4[];
+extern u8 star_switch_border2_pal_rgba16[];
+extern u8 star_switch_mark2_ci8[];
+extern u8 star_switch_mark2_pal_rgba16[];
+extern Vtx star_switch_Circle_mesh_layer_1_vtx_cull[8];
+extern Vtx star_switch_Circle_mesh_layer_1_vtx_0[28];
+extern Gfx star_switch_Circle_mesh_layer_1_tri_0[];
+extern Vtx star_switch_Circle_mesh_layer_1_vtx_1[10];
+extern Gfx star_switch_Circle_mesh_layer_1_tri_1[];
+extern Gfx mat_star_switch_SwitchBorder[];
+extern Gfx mat_revert_star_switch_SwitchBorder[];
+extern Gfx mat_star_switch_SwitchCenter[];
+extern Gfx mat_revert_star_switch_SwitchCenter[];
+extern Gfx star_switch_Circle_mesh_layer_1[];

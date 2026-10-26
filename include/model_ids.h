@@ -582,6 +582,11 @@ MODEL_ONOFF_EXCLAMATION = 259,
 
 
 #define MODEL_SILVER_STAR                        0x7A        // silver_star_geo //here put your custom star :3
+#define MODEL_STAR_SWITCH                        0x1FF       // star_switch_geo 
+#define MODEL_FLIPSWITCH_BLUE                    0xCF        // star_switch_geo //not done yet stub
+#define MODEL_FLIPSWITCH_YELLOW                  0x1FF       // star_switch_geo //not done yet stub
+#define MODEL_FLIPSWITCH_GREEN                   0x1FF       // star_switch_geo //not done yet stub
 
+#define MODEL_SHRINKPLATFORM                     0x1FE       // star_switch_geo 
 
 #endif // MODEL_IDS_H

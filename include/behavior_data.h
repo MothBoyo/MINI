@@ -554,4 +554,12 @@ extern const BehaviorScript bhvPropellerShroom[];
 extern const BehaviorScript bhvHiddenSilverStarsStar[];
 extern const BehaviorScript bhvCollectableSilverStar[];
 
+extern const BehaviorScript bhvFloorStarSwitch[];
+extern const BehaviorScript bhvStarHiddenBySwitch[];
+extern const BehaviorScript bhvFlipswitch[];
+extern const BehaviorScript bhvFlipswitchManager[];
+extern const BehaviorScript bhvShrinkPlatform[];
+
+extern const BehaviorScript bhvRainbowStar[];
+
 #endif // BEHAVIOR_DATA_H

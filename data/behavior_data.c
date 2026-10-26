@@ -6192,3 +6192,76 @@ const BehaviorScript bhvCollectableSilverStar[] = {
         CALL_NATIVE(bhv_silver_star_loop),
     END_LOOP(),
 };
+
+//star switch
+const BehaviorScript bhvFloorStarSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(star_switch_collision),
+    SET_INT(oBehParams2ndByte, PURPLE_SWITCH_BP_REVEAL_HIDDEN),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_purple_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+        SET_MODEL(MODEL_STAR_SWITCH),
+    END_LOOP(),
+};
+
+//switch_star
+const BehaviorScript bhvStarHiddenBySwitch[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_collect_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_hidden_by_switch_loop),
+    END_LOOP(),
+};
+
+//FLIPSWITCH (ADD MODEL AND COLLISION )
+const BehaviorScript bhvFlipswitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8), //CHANGE
+    SET_INT(oHealth, 0),
+    CALL_NATIVE(bhv_flipswitch_init),
+    SET_FLOAT(oDrawingDistance, 15000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flipswitch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFlipswitchManager[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    CALL_NATIVE(bhv_flipswitch_manager_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flipswitch_manager_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvShrinkPlatform[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(shrinking_platform_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(star_shrink_platform_loop),
+    END_LOOP(),
+};
+
+
+//rainbow star
+const BehaviorScript bhvRainbowStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    //LOAD_ANIMATIONS(oAnimations, fire_flower_anims),
+    //ANIMATE(0),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 30, /*Height*/ 30, /*Downwards offset*/ 0),
+    SET_FLOAT(oGraphYOffset, 30),
+    //CALL_NATIVE(bhv_1up_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_rainbow_star_loop),
+    END_LOOP(),
+};

@@ -23,3 +23,6 @@
 #include "onoffexclamation/geo.inc.c"
 
 #include "noteblock/geo.inc.c"
+
+#include "star_switch/geo.inc.c"
+#include "shrinking_platform/geo.inc.c"

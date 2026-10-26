@@ -202,6 +202,8 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_ONOFF_HOLLOW,            onoffhollow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ONOFF_EXCLAMATION,       onoffexclamation_geo),
     LOAD_MODEL_FROM_GEO(MODEL_NOTEBLOCK,               noteblock_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_STAR_SWITCH,             star_switch_geo),  //CUSTOM STAR SWITCH
+    LOAD_MODEL_FROM_GEO(MODEL_SHRINKPLATFORM,             shrinking_platform_geo),  //CUSTOM shrinkpaltform
     RETURN(),
 };
 
