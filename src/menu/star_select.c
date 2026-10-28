@@ -172,6 +172,12 @@ void bhv_act_selector_init(void) {
                 spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
                                         (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
             sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
+            //custom blue coins
+            //spawn the blue coins, need to be checked with firther checks
+            //spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
+            //                            (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
+            spawn_object_abs_with_rot(o, 0, MODEL_BLUE_COIN, bhvYellowBall,
+                                    (75 + (sVisibleStars * -75) + (i * 152)), 65, -300, 0, 0, 0);
         }
     }
 #else
@@ -180,7 +186,17 @@ void bhv_act_selector_init(void) {
             spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
                                     (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
         sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
+        //custom blue coins
+        //spawn the blue coins, need to be checked with firther checks
+        //spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
+        //                            (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
+        spawn_object_abs_with_rot(o, 0, MODEL_TRANSPARENT_STAR, bhvYellowBall,
+                                    (75 + (sVisibleStars * -75) + (i * 152)), 65, -300, 0, 0, 0);
+
     }
+
+
+    
 #endif
 
     render_100_coin_star(stars);
@@ -368,11 +384,13 @@ void print_act_selector_strings(void) {
     if (sVisibleStars != 0) {
         selectedActName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + sSelectedActIndex]);
 
+//changed 81 to 112 to fit blue coins!!! custom blue coins       
 #if MULTILANG
-        print_menu_generic_string(get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 8.0f), 81, selectedActName);
+        print_menu_generic_string(get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 8.0f), /*this*/ 112, selectedActName);
 #else
+        //changed 81 to 112 to fit blue coins!!! custom blue coins   
         actNameX = get_str_x_pos_from_center(ACT_NAME_X, selectedActName, 8.0f);
-        print_menu_generic_string(actNameX, 81, selectedActName);
+        print_menu_generic_string(actNameX, /*this*/ 112, selectedActName);
 #endif
     }
 
