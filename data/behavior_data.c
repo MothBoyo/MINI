@@ -6265,3 +6265,20 @@ const BehaviorScript bhvRainbowStar[] = {
         CALL_NATIVE(bhv_rainbow_star_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFlipswap[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(flipswap_inside_collision),
+    SPAWN_CHILD(/*Model*/ MODEL_FLIPSWAP_EDGE, /*Behavior*/ bhvFlipswapEdge),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flipswap_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFlipswapEdge[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BREAK(),
+};

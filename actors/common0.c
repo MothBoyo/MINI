@@ -79,3 +79,7 @@ UNUSED static const u64 binid_17 = 17;
 
 #include "koopa_shell/model.inc.c"
 UNUSED static const u64 binid_18 = 18;
+
+#include "flipswap_inside/collision.inc.c"
+#include "flipswap_inside/model.inc.c"
+#include "flipswap_edge/model.inc.c"

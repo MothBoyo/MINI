@@ -562,4 +562,7 @@ extern const BehaviorScript bhvShrinkPlatform[];
 
 extern const BehaviorScript bhvRainbowStar[];
 
+extern const BehaviorScript bhvFlipswap[];
+extern const BehaviorScript bhvFlipswapEdge[];
+
 #endif // BEHAVIOR_DATA_H
