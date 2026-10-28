@@ -37,7 +37,17 @@ void star_shrink_platform_loop(void) {
     case SHRINKPLATFROM_ACT_INACTIVE:
     if (o->oBehParams2ndByte == 0){
         obj_mark_for_deletion(o);
+    } else {
+        o->header.gfx.scale[0] = 1.0;
+        o->header.gfx.scale[2] = 1.0;
+
+        if (o->oTimer > 120) {
+            o->oAction = SHRINKPLATFROM_ACT_IDLE;    
+            cur_obj_unhide(); 
+        }
+
     }
+
     break;
 
     }

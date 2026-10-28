@@ -118,8 +118,9 @@ void bhv_rainbow_star_loop(void) {
 
         case POWERUP_TIMER:  
             o->oPosX = gMarioState->pos[0];
-            o->oPosY = gMarioState->pos[1];
+            o->oPosY = gMarioState->pos[1] + 20;
             o->oPosZ = gMarioState->pos[2];
+            gMarioState->healCounter   = 31;
             spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner); 
             if (o->oTimer > 540) {
                 o->oAction = POWERUP_END;

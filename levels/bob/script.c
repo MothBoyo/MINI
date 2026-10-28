@@ -41,11 +41,7 @@ const LevelScript level_bob_entry[] = {
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
 
-<<<<<<< HEAD
-	AREA(1, bob_area_0),
-=======
 	AREA(1, bob_area_1),
->>>>>>> b3346e5950b361ed1ae6ab22b45653baf9cebb43
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -73,14 +69,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 0, 0, -1101, 0, 0, 0, (3 << 24), bhvHiddenCollectableSwitch),
 		OBJECT(MODEL_GOOMBA, 0, 100, 1500, 0, 0, 0, (10 << 16) | (1), bhvCountdownTimer),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 180, 0, 0x000A0000, bhvSpinAirborneWarp),
-<<<<<<< HEAD
-		//OBJECT(MODEL_BLUE_COIN, 0, 600, 0, 0, 180, 0, 0x00003001, bhvCountdownTimer),
-		TERRAIN(bob_area_0_collision),
-		MACRO_OBJECTS(bob_area_0_macro_objs),
-=======
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
->>>>>>> b3346e5950b361ed1ae6ab22b45653baf9cebb43
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */

@@ -92,6 +92,7 @@ const LevelScript level_ssl_entry[] = {
 
     AREA(/*index*/ 1, ssl_geo_000648),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/   653, 1038,  6566, /*angle*/ 0,  90, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvSpinAirborneWarp),
+        OBJECT(/*model*/ MODEL_STAR, /*pos*/   653, 838,  5566, /*angle*/ 0,  90, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvRainbowStar),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/ -2048,    0,    56, /*angle*/ 0,   0, 0, /*behParam*/ 0x00140000, /*beh*/ bhvWarp),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/ -2048,  768, -1024, /*angle*/ 0,   0, 0, /*behParam*/ 0x0F1E0000, /*beh*/ bhvWarp),
         OBJECT(/*model*/ MODEL_NONE, /*pos*/  6930,    0, -4871, /*angle*/ 0, 159, 0, /*behParam*/ 0x001F0000, /*beh*/ bhvFadingWarp),

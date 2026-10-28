@@ -25,6 +25,8 @@
 #include "rumble_init.h"
 #include "config.h"
 
+#define POWERUP_RAINBOW 10
+
 u8  sDelayInvincTimer;
 s16 sInvulnerable;
 u32 interact_coin          (struct MarioState *m, u32 interactType, struct Object *obj);
@@ -202,7 +204,8 @@ u32 determine_interaction(struct MarioState *m, struct Object *obj) {
             }
         } else if (action == ACT_SLIDE_KICK || action == ACT_SLIDE_KICK_SLIDE) {
             interaction = INT_SLIDE_KICK;
-        } else if (action & ACT_FLAG_RIDING_SHELL) {
+            //CUSTOM RAINBOW STAR
+        } else if (action & ACT_FLAG_RIDING_SHELL || m->powerupState == POWERUP_RAINBOW) {
             interaction = INT_FAST_ATTACK_OR_SHELL;
         } else if (m->forwardVel <= -26.0f || 26.0f <= m->forwardVel) {
             interaction = INT_FAST_ATTACK_OR_SHELL;
@@ -683,7 +686,8 @@ u32 take_damage_from_interact_object(struct MarioState *m) {
         damage += (damage + 1) / 2;
     }
 
-    if (m->flags & MARIO_METAL_CAP) {
+    //CUSTOM RAINBOW STAR 
+    if (m->flags & MARIO_METAL_CAP || m->powerupState == POWERUP_RAINBOW) {
         damage = 0;
     }
 
@@ -698,10 +702,11 @@ u32 take_damage_from_interact_object(struct MarioState *m) {
 u32 take_damage_and_knock_back(struct MarioState *m, struct Object *obj) {
     u32 damage;
 
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
-        && !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
-        obj->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
-        m->interactObj = obj;
+    //CUSTOM RAINBOW STAR
+	if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP) && !(m->powerupState == POWERUP_RAINBOW)
+		&& !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
+		obj->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
+		m->interactObj = obj;
 
         damage = take_damage_from_interact_object(m);
 
@@ -1135,8 +1140,10 @@ u32 interact_strong_wind(struct MarioState *m, UNUSED u32 interactType, struct O
 u32 interact_flame(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 burningAction = ACT_BURNING_JUMP;
 
-    if (!sInvulnerable && !(m->flags & MARIO_METAL_CAP) && !(m->flags & MARIO_VANISH_CAP)
-        && !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
+    //CUSTOM RAINBOW STAR
+	if (!sInvulnerable && !(m->flags & MARIO_METAL_CAP) && !(m->powerupState == POWERUP_RAINBOW)
+		&& !(m->flags & MARIO_VANISH_CAP)
+		&& !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         queue_rumble_data(5, 80);
         obj->oInteractStatus = INT_STATUS_INTERACTED;
         m->interactObj       = obj;
@@ -1162,7 +1169,8 @@ u32 interact_flame(struct MarioState *m, UNUSED u32 interactType, struct Object 
 
 u32 interact_snufit_bullet(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)) {
-        if (m->flags & MARIO_METAL_CAP) {
+        //CUSTOM RAINBOW STAR
+        if (m->flags & MARIO_METAL_CAP || m->powerupState == POWERUP_RAINBOW) {
             obj->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED;
             play_sound(SOUND_ACTION_SNUFFIT_BULLET_HIT_METAL, m->marioObj->header.gfx.cameraToObject);
         } else {
@@ -1203,7 +1211,8 @@ u32 interact_clam_or_bubba(struct MarioState *m, UNUSED u32 interactType, struct
 
 u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    //CUSTOM RAINBOW STAR
+    if (m->flags & MARIO_METAL_CAP || (m->powerupState == POWERUP_RAINBOW)) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, obj);
@@ -1241,7 +1250,9 @@ u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object 
 }
 
 u32 interact_shock(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
-    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
+
+    //CUSTOM RAINBOW STAR
+    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP) && !(m->powerupState == POWERUP_RAINBOW)
         && !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         u32 actionArg = (m->action & (ACT_FLAG_AIR | ACT_FLAG_ON_POLE | ACT_FLAG_HANGING)) == 0;
 
@@ -1326,7 +1337,8 @@ u32 interact_hit_from_below(struct MarioState *m, UNUSED u32 interactType, struc
 
 u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
+    //CUSTOM RAINBOW STAR
+    if (m->flags & MARIO_METAL_CAP || m->powerupState == POWERUP_RAINBOW) {
         interaction = INT_FAST_ATTACK_OR_SHELL;
     } else {
         interaction = determine_interaction(m, obj);
@@ -1858,6 +1870,8 @@ void pss_end_slide(struct MarioState *m) {
     }
 }
 
+
+
 void mario_handle_special_floors(struct MarioState *m) {
     if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
         return;
@@ -1887,7 +1901,10 @@ void mario_handle_special_floors(struct MarioState *m) {
 
         if (!(m->action & (ACT_FLAG_AIR | ACT_FLAG_SWIMMING))) {
             if (floorType == SURFACE_BURNING) {
-                check_lava_boost(m);
+                //CUSTOM RAINBOW STAR
+                if (!(m->powerupState == POWERUP_RAINBOW)) {
+                    check_lava_boost(m);
+                }
             }
         }
     }

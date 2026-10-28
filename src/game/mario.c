@@ -1707,6 +1707,7 @@ static void queue_rumble_particles(struct MarioState *m) {
 
 #define POWERUP_PROPELLER 5
 
+#define POWERUP_RAINBOW 10
 /**
  * Main function for executing Mario's behavior. Returns particleFlags.
  */

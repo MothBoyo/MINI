@@ -123,8 +123,11 @@ void mario_bonk_reflection(struct MarioState *m, u32 negateSpeed) {
     }
 }
 
+#define POWERUP_RAINBOW 10 //10
 u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
-    if (m->action & ACT_FLAG_RIDING_SHELL) {
+
+    //CUSTOM RAINBOW STAR
+    if (m->action & ACT_FLAG_RIDING_SHELL || m->powerupState == POWERUP_RAINBOW) {
         m->quicksandDepth = 0.0f;
     } else {
         if (m->quicksandDepth < 1.1f) {
