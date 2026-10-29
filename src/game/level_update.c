@@ -961,6 +961,16 @@ void update_hud_values(void) {
         gHudDisplay.lives = gMarioState->numLives;
         gHudDisplay.keys = gMarioState->numKeys;
 
+        //blue coins
+        s32 fileIndex = gCurrSaveFileNum - 1;
+        gHudDisplay.blueCoins = save_file_get_total_blue_coins(fileIndex);
+    
+        u16 blueCoinsSpent = save_file_get_blue_coins_spent(fileIndex);
+
+        gHudDisplay.actualBlueCoins = gHudDisplay.blueCoins -  blueCoinsSpent;
+
+        //blue coins
+
         if (numHealthWedges > gHudDisplay.wedges) {
             play_sound(SOUND_MENU_POWER_METER, gGlobalSoundSource);
         }

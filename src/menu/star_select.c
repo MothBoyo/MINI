@@ -116,6 +116,36 @@ void render_100_coin_star(u8 stars) {
  * the correct star models, the 100 coin star and also handles
  * checks of what star should be next in sInitSelectedActNum.
  */
+
+#define STAR_Y_POS_SELECT_SCREEN 328
+#define COIN1_Y_POS_SELECT_SCREEN 160 + 10
+#define COIN2_Y_POS_SELECT_SCREEN 110 + 10
+#define COIN3_Y_POS_SELECT_SCREEN 60 + 10
+
+#define ACT_AREA_NUM_ACTS      6 
+
+static const u8 sActBlueCoinNumers[LEVEL_COUNT + 1][ACT_AREA_NUM_ACTS] = {
+    [LEVEL_BOB] = { 1, 2, 3, 3, 0, 1 },
+    [LEVEL_WF]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_JRB] = { 2, 1, 3, 0, 2, 1 }, //uwu
+    [LEVEL_CCM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_BBH] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_HMC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_LLL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SSL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_DDD] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SL]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_WDW] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_TTM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_THI] = { 1, 2, 3, 3, 2, 1 },
+    [LEVEL_TTC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_RR]  = { 1, 1, 1, 1, 1, 1 },
+
+    // [LEVEL_XXX] = { ... },
+};
+
+
+
 void bhv_act_selector_init(void) {
     s16 i = 0;
     s32 selectorModelIDs[10];
@@ -158,40 +188,82 @@ void bhv_act_selector_init(void) {
     }
 
     // Render star selector objects
+
+
+
 #ifdef WIDE
     if (gConfig.widescreen) {
         for (i = 0; i < sVisibleStars; i++) {
             sStarSelectorModels[i] =
                 spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                        ((75 + (sVisibleStars * -75) + (i * 152)) * 4.0f) / 3, 248, -300, 0, 0, 0);
+                                        ((75 + (sVisibleStars * -75) + (i * 152)) * 4.0f) / 3, STAR_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
             sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
         }
     } else {
         for (i = 0; i < sVisibleStars; i++) {
             sStarSelectorModels[i] =
                 spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                        (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
+                                        (75 + (sVisibleStars * -75) + (i * 152)), STAR_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
             sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
             //custom blue coins
-            //spawn the blue coins, need to be checked with firther checks
-            //spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-            //                            (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
-            spawn_object_abs_with_rot(o, 0, MODEL_BLUE_COIN, bhvYellowBall,
-                                    (75 + (sVisibleStars * -75) + (i * 152)), 65, -300, 0, 0, 0);
+            //should check for if needs to appear gray or blue. based on the flag , row1 checks for courseBlueCoins1[COURSE_COUNT];
+            //row1
+
+            //u8 maxCoinsForThisAct = 3;// sActBlueCoinNumers[courseIndex][i];
+            //u8 maxCoinsForThisAct = sActBlueCoinNumers[COURSE_NUM_TO_INDEX(gCurrCourseNum)][i];
+            u8 maxCoinsForThisAct = sActBlueCoinNumers[gCurrLevelNum][i];
+
+            u8 flagsRow1 = save_file_get_blue_coins_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 0);
+            u8 flagsRow2 = save_file_get_blue_coins_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 1);
+            u8 flagsRow3 = save_file_get_blue_coins_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 2);
+
+            s32 coinModelRow1 = MODEL_GRAY_COIN;
+            s32 coinModelRow2 = MODEL_GRAY_COIN; //change Models
+            s32 coinModelRow3 = MODEL_GRAY_COIN; //change Models
+            
+            //change models
+            if (flagsRow1 & (1 << i)) {
+                coinModelRow1 = MODEL_BLUE_COIN; 
+            }
+
+            if (flagsRow2 & (1 << i)) {
+                coinModelRow2 = MODEL_BLUE_COIN;
+            }
+
+            if (flagsRow3 & (1 << i)) {
+                coinModelRow3 = MODEL_BLUE_COIN; 
+            } 
+
+
+
+
+
+
+            //HERE DO THE CHECK WITH THE TABLE
+
+            if (maxCoinsForThisAct >= 1) {
+                spawn_object_abs_with_rot(o, 0, coinModelRow1, bhvBlueCoinStarSelect,
+                                        (75 + (sVisibleStars * -75) + (i * 152)), COIN1_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
+            }
+            
+            if (maxCoinsForThisAct >= 2) {
+                spawn_object_abs_with_rot(o, 0, coinModelRow2, bhvBlueCoinStarSelect,
+                                        (75 + (sVisibleStars * -75) + (i * 152)), COIN2_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
+            }          
+            
+            if (maxCoinsForThisAct >= 3) {
+                spawn_object_abs_with_rot(o, 0, coinModelRow3, bhvBlueCoinStarSelect,
+                                        (75 + (sVisibleStars * -75) + (i * 152)), COIN3_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
+            }
+                                                  
         }
     }
 #else
     for (i = 0; i < sVisibleStars; i++) {
         sStarSelectorModels[i] =
             spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-                                    (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
+                                    (75 + (sVisibleStars * -75) + (i * 152)), STAR_Y_POS_SELECT_SCREEN, -300, 0, 0, 0);
         sStarSelectorModels[i]->oStarSelectorSize = 1.0f;
-        //custom blue coins
-        //spawn the blue coins, need to be checked with firther checks
-        //spawn_object_abs_with_rot(o, 0, selectorModelIDs[i], bhvActSelectorStarType,
-        //                            (75 + (sVisibleStars * -75) + (i * 152)), 248, -300, 0, 0, 0);
-        spawn_object_abs_with_rot(o, 0, MODEL_TRANSPARENT_STAR, bhvYellowBall,
-                                    (75 + (sVisibleStars * -75) + (i * 152)), 65, -300, 0, 0, 0);
 
     }
 
@@ -349,7 +421,7 @@ void print_act_selector_strings(void) {
     // Print the coin highscore.
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-    print_hud_my_score_coins(1, gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 155, 106);
+    //print_hud_my_score_coins(1, gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 155, 106);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
@@ -357,9 +429,9 @@ void print_act_selector_strings(void) {
     // Print the "MY SCORE" text if the coin score is more than 0
     if (save_file_get_course_coin_score(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum)) != 0) {
 #if MULTILANG
-        print_generic_string(95, 118, myScore[language]);
+        //print_generic_string(95, 118, myScore[language]);
 #else
-        print_generic_string(102, 118, myScore);
+        //print_generic_string(102, 118, myScore);
 #endif
     }
 
@@ -398,9 +470,10 @@ void print_act_selector_strings(void) {
     for (i = 1; i <= sVisibleStars; i++) {
         starNumbers[0] = i;
 #if MULTILANG
-        print_menu_generic_string(143 - sVisibleStars * 15 + i * 30, 38, starNumbers);
+        //custom blue coins
+        print_menu_generic_string(143 - sVisibleStars * 15 + i * 30, 18, starNumbers);
 #else
-        print_menu_generic_string(139 - sVisibleStars * 17 + i * 34, 38, starNumbers);
+        print_menu_generic_string(139 - sVisibleStars * 17 + i * 34, 18, starNumbers);
 #endif
     }
 

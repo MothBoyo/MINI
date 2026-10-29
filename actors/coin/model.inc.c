@@ -438,6 +438,18 @@ static const Vtx coin_seg3_vertex_red[] = {
     {{{    35,     70,      0}, 0, {  1984,      0}, {0xff, 0x00, 0x00, 0xff}}},
     {{{   -35,     70,      0}, 0, {     0,      0}, {0xff, 0x00, 0x00, 0xff}}},
 };
+
+//gray coins
+// 0x03005700
+static const Vtx coin_seg3_vertex_gray[] = {
+    {{{   -50,      0,      0}, 0, {     0,   1984}, {0xff, 0xff, 0xff, 0x7f}}},
+    {{{    50,      0,      0}, 0, {  1984,   1984}, {0xff, 0xff, 0xff, 0x7f}}},
+    {{{    50,    100,      0}, 0, {  1984,      0}, {0xff, 0xff, 0xff, 0x7f}}},
+    {{{   -50,    100,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0x7f}}},
+};
+
+
+
 #endif
 
 // 0x03005780
@@ -617,5 +629,46 @@ const Gfx coin_seg3_dl_red_tilt_left[] = {
     gsSPVertex(coin_seg3_vertex_red, 4, 0),
     gsSPBranchList(coin_seg3_sub_dl_end),
 };
+
+
+//gray coins
+// 0x030078A0 - 0x030078C8
+const Gfx coin_seg3_dl_gray_front[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_front),
+    gsSPDisplayList(coin_seg3_sub_dl_begin),
+    gsSPVertex(coin_seg3_vertex_gray, 4, 0),
+    gsSPBranchList(coin_seg3_sub_dl_end),
+};
+
+// 0x030078C8 - 0x030078F0
+const Gfx coin_seg3_dl_gray_tilt_right[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_tilt_right),
+    gsSPDisplayList(coin_seg3_sub_dl_begin),
+    gsSPVertex(coin_seg3_vertex_gray, 4, 0),
+    gsSPBranchList(coin_seg3_sub_dl_end),
+};
+
+// 0x030078F0 - 0x03007918
+const Gfx coin_seg3_dl_gray_side[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_side),
+    gsSPDisplayList(coin_seg3_sub_dl_begin),
+    gsSPVertex(coin_seg3_vertex_gray, 4, 0),
+    gsSPBranchList(coin_seg3_sub_dl_end),
+};
+
+// 0x03007918 - 0x03007940
+const Gfx coin_seg3_dl_gray_tilt_left[] = {
+    gsDPPipeSync(),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_tilt_left),
+    gsSPDisplayList(coin_seg3_sub_dl_begin),
+    gsSPVertex(coin_seg3_vertex_gray, 4, 0),
+    gsSPBranchList(coin_seg3_sub_dl_end),
+};
+
+
+
 
 #endif

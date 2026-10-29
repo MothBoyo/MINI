@@ -827,3 +827,4 @@ void obj_spit_fire(s16 relativePosX, s16 relativePosY, s16 relativePosZ, f32 sca
 #include "behaviors/powerup.inc.c"
 #include "behaviors/silver_star.inc.c"
 #include "behaviors/moving_platforms.inc.c"
+#include "behaviors/collectable_blue_coin.inc.c"

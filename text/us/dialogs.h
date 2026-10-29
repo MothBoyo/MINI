@@ -53,23 +53,18 @@ Please come back to see\n\
 me after you've retrieved\n\
 the Power Star!"))
 
-DEFINE_DIALOG(DIALOG_002, 1, 4, 95, 200, _("\
-Hey, you! It's dangerous\n\
-ahead, so listen up! Take\n\
-my advice.\n\
+//custom dialog for blue coins
+DEFINE_DIALOG(DIALOG_002, 1, 10, 95, 200, _("\
+YOU GOT A @004293FFBLUE COIN!@FFFFFFFF\n\
+You can trade @004293FF10 of them@FFFFFFFF\n\
+for a @FFC900FFStar@FFFFFFFF at\n\
+the shopkeeper!\n\
 \n\
-Cross the two\n\
-bridges ahead, then\n\
-watch for falling\n\
-water bombs.\n\
-The Big Bob-omb at the\n\
-top of the mountain is\n\
-very powerful--don't let\n\
-him grab you!\n\
-We're Bob-omb Buddies,\n\
-and we're on your side.\n\
-You can talk to us\n\
-whenever you'd like to!"))
+L QHHG D KXJ\n\
+VRPHWLPHV\n\
+\n\
+Wanna save??? :3\n\
+//Yes////Pass"))
 
 DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
 Thank you, Mario! The Big\n\

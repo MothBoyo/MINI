@@ -581,6 +581,9 @@ void star_shrink_platform_loop(void);
 
 void bhv_flipswap_loop(void);
 
+void bhv_collect_blue_coin_init(void);
+void bhv_collect_blue_coin_loop(void);
+void bhv_star_select_blue_coin_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

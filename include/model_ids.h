@@ -544,8 +544,9 @@
 #define MODEL_CHUCKYA                     0xDF        // chuckya_geo
 #define MODEL_WHITE_PUFF                  0xE0        // white_puff_geo
 #define MODEL_TRAJECTORY_MARKER_BALL      0xE1        // bowling_ball_track_geo - duplicate used in SSL Pyramid small sized and as a track ball
+#define MODEL_GRAY_COIN                   0xE2        // gray_coin_geo
 
-#ifdef IA8_30FPS_COINS
+#ifdef IA8_30FPS_COINS //fuck those ifdef hell shit
 #define MODEL_SILVER_COIN                 0xE2        // silver_coin_geo
 #define MODEL_SILVER_COIN_NO_SHADOW       0xE3        // silver_coin_no_shadow_geo
 #endif

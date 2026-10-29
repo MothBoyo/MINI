@@ -6282,3 +6282,26 @@ const BehaviorScript bhvFlipswapEdge[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BREAK(),
 };
+
+//collectable blue coins
+const BehaviorScript bhvCollectableBlueCoin[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(bhv_collect_blue_coin_init),
+    BILLBOARD(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_collect_blue_coin_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBlueCoinStarSelect[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_select_blue_coin_loop),
+    END_LOOP(),
+};

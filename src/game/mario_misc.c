@@ -159,6 +159,15 @@ static void toad_message_fading(void) {
 }
 
 void bhv_toad_message_loop(void) {
+
+    //toad 
+    print_text_fmt_int(20, 20, "SAVE %d", sizeof(struct SaveBuffer));
+    print_text_fmt_int(20, 40, "FREE %d", EEPROM_SIZE - sizeof(struct SaveBuffer));
+
+
+
+
+
     if (o->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         o->oInteractionSubtype = INT_STATUS_NONE;
         switch (o->oToadMessageState) {

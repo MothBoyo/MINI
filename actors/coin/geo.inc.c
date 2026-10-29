@@ -265,4 +265,27 @@ const GeoLayout red_coin_no_shadow_geo[] = {
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
+
+
+// gray coin
+const GeoLayout gray_coin_geo[] = {
+   GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0xB4, 80),
+   GEO_OPEN_NODE(),
+      GEO_SWITCH_CASE(8, geo_switch_anim_state),
+      GEO_OPEN_NODE(),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_front),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_front),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_tilt_right),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_tilt_right),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_side),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_side),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_tilt_left),
+         GEO_DISPLAY_LIST(LAYER_OCCLUDE_SILHOUETTE_ALPHA, coin_seg3_dl_gray_tilt_left),
+      GEO_CLOSE_NODE(),
+   GEO_CLOSE_NODE(),
+   GEO_END(),
+};
+
+
 #endif
+

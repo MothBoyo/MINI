@@ -598,6 +598,16 @@ void render_hud_coins(void) {
 }
 
 /**
+ * Renders the amount of blue coins collected.
+ */
+void render_hud_blue_coins(void) {
+    print_text(HUD_COINS_X, HUD_TOP_Y, "+"); // 'SILVER Coin' glyph
+    print_text((HUD_COINS_X + 16), HUD_TOP_Y, "*"); // 'X' glyph
+    print_text_fmt_int((HUD_COINS_X + 30), HUD_TOP_Y, "%d", gHudDisplay.actualBlueCoins);
+}
+
+
+/**
  * Renders the amount of stars collected.
  * Disables "X" glyph when Mario has 100 stars or more.
  */
@@ -746,7 +756,11 @@ void render_hud(void) {
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
+        } else {
+        //custom blue coins wip    
+            render_hud_blue_coins();
         }
+
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
             render_hud_stars();

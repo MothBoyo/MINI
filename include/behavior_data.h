@@ -565,4 +565,7 @@ extern const BehaviorScript bhvRainbowStar[];
 extern const BehaviorScript bhvFlipswap[];
 extern const BehaviorScript bhvFlipswapEdge[];
 
+extern const BehaviorScript bhvCollectableBlueCoin[];
+extern const BehaviorScript bhvBlueCoinStarSelect[];
+
 #endif // BEHAVIOR_DATA_H

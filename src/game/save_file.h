@@ -40,7 +40,10 @@ struct SaveFile {
     // The most significant bit of the byte *following* each course is set if the
     // cannon is open.
     u8 courseStars[COURSE_COUNT]; // 200 bits
-    u8 courseBlueCoins[COURSE_COUNT]; // 200 bits
+    u8 courseBlueCoins1[COURSE_COUNT]; // 200 bits //first coins
+    u8 courseBlueCoins2[COURSE_COUNT]; // 200 bits //second coins
+    u8 courseBlueCoins3[COURSE_COUNT]; // 200 bits //thrid coins
+    u16 blueCoinsSpent;
 
     u8 courseCoinScores[COURSE_STAGES_COUNT]; // 120 bits
 
@@ -197,6 +200,14 @@ void save_file_move_cap_to_default_location(void);
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);
 s32 check_warp_checkpoint(struct WarpNode *warpNode);
+
+//custom blue coins
+u32 save_file_get_blue_coins_flags(s32 fileIndex, s32 courseIndex, u8 row);
+void save_file_set_blue_coins_flags(s32 fileIndex, s32 courseIndex, u32 starFlags, u8 row);
+s32 save_file_get_course_blue_coins_count(s32 fileIndex, s32 courseIndex);
+s32 save_file_get_total_blue_coins(s32 fileIndex);
+u16 save_file_get_blue_coins_spent(s32 fileIndex);
+
 
 #if MULTILANG
 enum EuLanguages {

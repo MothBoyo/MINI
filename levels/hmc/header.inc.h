@@ -1,0 +1,12 @@
+extern const GeoLayout hmc_area_1_geo[];
+extern const GeoLayout hmc_area_1[];
+extern const Collision hmc_area_1_collision[];
+extern const MacroObject hmc_area_1_macro_objs[];
+extern u8 hmc_dl_diamon2_ci8[];
+extern u8 hmc_dl_diamon2_pal_rgba16[];
+extern Vtx hmc_dl_Plane_mesh_layer_1_vtx_cull[8];
+extern Vtx hmc_dl_Plane_mesh_layer_1_vtx_0[4];
+extern Gfx hmc_dl_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_hmc_dl_f3dlite_material[];
+extern Gfx mat_revert_hmc_dl_f3dlite_material[];
+extern Gfx hmc_dl_Plane_mesh_layer_1[];

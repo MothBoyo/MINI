@@ -97,6 +97,8 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_YELLOW_COIN_NO_SHADOW,   yellow_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN,               blue_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_COIN_NO_SHADOW,     blue_coin_no_shadow_geo),
+    //gray coin
+    LOAD_MODEL_FROM_GEO(MODEL_GRAY_COIN,                gray_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WINGED_METAL_CAP, marios_winged_metal_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_METAL_CAP,        marios_metal_cap_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MARIOS_WING_CAP,         marios_wing_cap_geo),

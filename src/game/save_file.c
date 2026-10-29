@@ -781,3 +781,110 @@ s32 check_warp_checkpoint(struct WarpNode *warpNode) {
 
     return warpCheckpointActive;
 }
+
+
+
+//custom blue coins
+//rows determine which array looks
+u32 save_file_get_blue_coins_flags(s32 fileIndex, s32 courseIndex, u8 row) {
+    u32 starFlags;
+
+    if (row == 0) {
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
+        } else {
+            starFlags = gSaveBuffer.files[fileIndex][0].courseBlueCoins1[courseIndex] & 0x7F;
+        }
+    }
+    if (row == 1) {
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
+        } else {
+            starFlags = gSaveBuffer.files[fileIndex][0].courseBlueCoins2[courseIndex] & 0x7F;
+        }
+    }
+    if (row == 2) {
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
+        } else {
+            starFlags = gSaveBuffer.files[fileIndex][0].courseBlueCoins3[courseIndex] & 0x7F;
+        }
+    }
+
+    return starFlags;
+}
+
+/**
+ * Add to the bitset of obtained stars in the specified course.
+ * If course is COURSE_NONE, add to the bitset of obtained castle secret stars.
+ */
+void save_file_set_blue_coins_flags(s32 fileIndex, s32 courseIndex, u32 starFlags, u8 row) {
+
+    if (row == 0) {    
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            gSaveBuffer.files[fileIndex][0].flags |= STAR_FLAG_TO_SAVE_FLAG(starFlags);
+        } else {
+            gSaveBuffer.files[fileIndex][0].courseBlueCoins1[courseIndex] |= starFlags;
+        }
+    }
+    if (row == 1) {    
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            gSaveBuffer.files[fileIndex][0].flags |= STAR_FLAG_TO_SAVE_FLAG(starFlags);
+        } else {
+            gSaveBuffer.files[fileIndex][0].courseBlueCoins2[courseIndex] |= starFlags;
+        }
+    }
+    if (row == 2) {    
+        if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
+            gSaveBuffer.files[fileIndex][0].flags |= STAR_FLAG_TO_SAVE_FLAG(starFlags);
+        } else {
+            gSaveBuffer.files[fileIndex][0].courseBlueCoins3[courseIndex] |= starFlags;
+        }
+    }   
+
+    gSaveBuffer.files[fileIndex][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+s32 save_file_get_course_blue_coins_count(s32 fileIndex, s32 courseIndex) {
+    s32 i;
+    s32 count = 0;
+    u8 flag;
+    u32 rowFlags;
+    u8 row;
+
+    //looping the loop
+    for (row = 0; row < 3; row++) {
+        //flags flags
+        rowFlags = save_file_get_blue_coins_flags(fileIndex, courseIndex, row);
+        
+        //flag
+        flag = 1;
+
+        //find the bits 0 to 6
+        for (i = 0; i < 6; i++, flag <<= 1) {
+            if (rowFlags & flag) {
+                count++;
+            }
+        }
+    }
+
+    return count;
+}
+
+s32 save_file_get_total_blue_coins(s32 fileIndex) {
+    s32 course;
+    s32 total = 0;
+
+    //Course count is the max???
+    for (course = 0; course < COURSE_COUNT; course++) {
+        total += save_file_get_course_blue_coins_count(fileIndex, course);
+    }
+
+    return total;
+}
+
+u16 save_file_get_blue_coins_spent(s32 fileIndex) {
+    if (fileIndex < 0 || fileIndex >= 4) return 0;
+    return gSaveBuffer.files[fileIndex][0].blueCoinsSpent;
+}
