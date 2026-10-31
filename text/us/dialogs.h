@@ -1566,7 +1566,8 @@ know better. You're\n\
 disqualified! Next time,\n\
 play fair!"))
 
-DEFINE_DIALOG(DIALOG_133, 1, 6, 30, 200, _("\
+// Parameters: dialog enum ID, (unused), lines per box, left offset, width
+DEFINE_DIALOG(DIALOG_133, 1, 12, 30, 210, _("\
 Am I glad to see you! The\n\
 Princess...and I...and,\n\
 well, everybody...we're all\n\

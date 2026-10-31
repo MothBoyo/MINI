@@ -626,6 +626,15 @@ s32 act_wall_kick_air(struct MarioState *m) {
 }
 
 s32 act_long_jump(struct MarioState *m) {
+
+
+    if (gMarioState->powerupState == 5) {
+
+        if (m->input & INPUT_Z_PRESSED) {
+            return set_mario_action(m, ACT_GROUND_POUND, 0);
+        }
+    }
+
     s32 animation;
     if (!m->marioObj->oMarioLongJumpIsSlow) {
         animation = MARIO_ANIM_FAST_LONGJUMP;
@@ -675,11 +684,13 @@ s32 act_twirling(struct MarioState *m) {
     s16 startTwirlYaw = m->twirlYaw;
     s16 yawVelTarget;
 
-#ifdef Z_TWIRL
-    if (m->input & INPUT_Z_DOWN) {
-        yawVelTarget = 0x2800;
-    } else
-#endif
+//#ifdef Z_TWIRL
+    if (gMarioState->powerupState == 5) {
+        if (m->input & INPUT_Z_DOWN) {
+            yawVelTarget = 0x2800;
+        } 
+    }    
+//#endif
 
     if (m->input & INPUT_A_DOWN) {
         yawVelTarget = 0x2000;
@@ -721,6 +732,13 @@ s32 act_twirling(struct MarioState *m) {
 }
 
 s32 act_dive(struct MarioState *m) {
+
+    if (gMarioState->powerupState == 5) {
+        if (m->input & INPUT_Z_PRESSED) {
+            return set_mario_action(m, ACT_GROUND_POUND, 0);
+        }
+    } 
+
     if (m->actionArg == 0) {
         play_mario_sound(m, SOUND_ACTION_THROW, SOUND_MARIO_HOOHOO);
     } else {

@@ -61,6 +61,11 @@ void bhv_collect_blue_coin_loop(void) {
             break;    
 
         case COIN_MODE_DIALOG: 
+
+                o->oPosX = gMarioState->pos[0];
+                o->oPosY = gMarioState->pos[1] + 20;
+                o->oPosZ = gMarioState->pos[2];
+                
                 {
                 if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
                 o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
