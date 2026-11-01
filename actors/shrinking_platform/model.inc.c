@@ -99,6 +99,7 @@ Gfx shrinking_platform_Inside_mesh_layer_1_tri_0[] = {
 
 
 Gfx mat_shrinking_platform_Checkboard[] = {
+	gsSPClearGeometryMode(G_CULL_BACK),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetAlphaDither(G_AD_NOISE),
@@ -116,6 +117,7 @@ Gfx mat_shrinking_platform_Checkboard[] = {
 };
 
 Gfx mat_revert_shrinking_platform_Checkboard[] = {
+	gsSPSetGeometryMode(G_CULL_BACK),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
 	gsDPSetTextureLUT(G_TT_NONE),
