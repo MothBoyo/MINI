@@ -66,21 +66,24 @@ VRPHWLPHV\n\
 Wanna save??? :3\n\
 //Yes////Pass"))
 
-DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
+//custom dialog ofr hte shopkeeper
+DEFINE_DIALOG(DIALOG_003, 1, 4, 95, 200, _("\
+Okay... this is the\n\
+eternal blue coin trade\n\
+revival system tech\n\
+society exchange center.\n\
+The thing is easy.\n\
+you bring me @004293FFBlue coins@FFFFFFFF\n\
+and I give you @FFC900FFStars@FFFFFFFF\n\
+in exchange,\n\
+each @FFC900FFStar@FFFFFFFF cost @004293FF10 blue\n\
+coins@FFFFFFFF, you can find them\n\
+in the courses, the act\n\
+shows how many are.\n\
+@004293FFBlue coins@FFFFFFFF\n\
+can be scatter around the\n\
+level or hidden...\n\
+that's all."))
 
 DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
 We're peace-loving\n\

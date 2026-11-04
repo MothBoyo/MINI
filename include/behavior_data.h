@@ -567,5 +567,6 @@ extern const BehaviorScript bhvFlipswapEdge[];
 
 extern const BehaviorScript bhvCollectableBlueCoin[];
 extern const BehaviorScript bhvBlueCoinStarSelect[];
+extern const BehaviorScript bhvShopkeeperNpc[];
 
 #endif // BEHAVIOR_DATA_H

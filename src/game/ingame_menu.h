@@ -176,4 +176,6 @@ void render_hud_cannon_reticle(void);
 void reset_red_coins_collected(void);
 s32 render_menus_and_dialogs(void);
 
+s32 is_dialog_active(void);
+
 #endif // INGAME_MENU_H

@@ -2195,10 +2195,19 @@ s32 render_course_complete_screen(void) {
     return MENU_OPT_NONE;
 }
 
+#include "shopkeeper_menu.h"
+
+s32 is_dialog_active(void) {
+    return gDialogID != DIALOG_NONE;
+}
+
+
 s32 render_menus_and_dialogs(void) {
     s32 mode = MENU_OPT_NONE;
 
     create_dl_ortho_matrix();
+
+    shopkeeper_menu_render(); //pls plos
 
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {

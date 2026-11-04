@@ -547,8 +547,13 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse) 
         count += save_file_get_course_star_count(fileIndex, minCourse);
     }
 
+    //get blue coins star //custom blue cioins
+    count += save_file_get_blue_coins_spent(fileIndex) / STAR_BLUE_COIN_PRICE;
+
     // Add castle secret star count.
     return save_file_get_course_star_count(fileIndex, COURSE_NUM_TO_INDEX(COURSE_NONE)) + count;
+
+
 }
 
 void save_file_set_flags(u32 flags) {
@@ -887,4 +892,9 @@ s32 save_file_get_total_blue_coins(s32 fileIndex) {
 u16 save_file_get_blue_coins_spent(s32 fileIndex) {
     if (fileIndex < 0 || fileIndex >= 4) return 0;
     return gSaveBuffer.files[fileIndex][0].blueCoinsSpent;
+}
+
+void save_file_set_blue_coins_spent(s32 fileIndex, u16 amount) {
+    gSaveBuffer.files[fileIndex][0].blueCoinsSpent += amount; 
+    gSaveFileModified = TRUE;
 }

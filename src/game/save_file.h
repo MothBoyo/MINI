@@ -202,12 +202,14 @@ void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);
 s32 check_warp_checkpoint(struct WarpNode *warpNode);
 
 //custom blue coins
+//blue coin price!!!
+#define STAR_BLUE_COIN_PRICE 10
 u32 save_file_get_blue_coins_flags(s32 fileIndex, s32 courseIndex, u8 row);
 void save_file_set_blue_coins_flags(s32 fileIndex, s32 courseIndex, u32 starFlags, u8 row);
 s32 save_file_get_course_blue_coins_count(s32 fileIndex, s32 courseIndex);
 s32 save_file_get_total_blue_coins(s32 fileIndex);
 u16 save_file_get_blue_coins_spent(s32 fileIndex);
-
+void save_file_set_blue_coins_spent(s32 fileIndex, u16 amount);
 
 #if MULTILANG
 enum EuLanguages {

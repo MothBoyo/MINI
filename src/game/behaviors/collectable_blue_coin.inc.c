@@ -102,3 +102,100 @@ void bhv_star_select_blue_coin_loop(void) {
     o->oAnimState++;
     cur_obj_scale(0.65f);
 }
+
+
+
+
+
+
+//shoopkeeper
+//R UVVO ORPV RN MLG DZOPRMT LM Z HFMHSRMV ML NLIV
+
+#include "game/shopkeeper_menu.h"
+#include "game/save_file.h"
+
+
+#define SHOPKEEPER_EXPLAIN_DIALOG DIALOG_003
+
+void bhv_shopkeeper_loop(void) {
+
+    //simulate dialog text npc
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 1000.0f) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x150);
+            }
+            if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+            }
+            break;
+
+        case 1:
+            shopkeeper_menu_open();
+            o->oAction = 2;
+            break;
+
+        case 2: // menu
+            set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT);
+            switch (shopkeeper_menu_update()) {
+
+            
+                case SHOP_EXCHANGE: {
+                    s32 fileIndex = gCurrSaveFileNum - 1;
+                    //set coin spent
+                    if ((save_file_get_total_blue_coins(fileIndex) - save_file_get_blue_coins_spent(fileIndex)) >= STAR_BLUE_COIN_PRICE) {
+                        //the power of the stars has
+                        save_file_set_blue_coins_spent(fileIndex, STAR_BLUE_COIN_PRICE);
+
+                        //restore to the castle
+                        gMarioState->numStars = save_file_get_total_star_count(fileIndex,COURSE_NUM_TO_INDEX(COURSE_MIN), COURSE_NUM_TO_INDEX(COURSE_MAX));
+
+                        //and all tranks to you
+                        shopkeeper_menu_hide();
+
+                        //mario...
+                        play_sound(SOUND_GENERAL_ACTIVATE_CAP_SWITCH, gGlobalSoundSource);
+                        gMarioState->action = ACT_FALL_AFTER_STAR_GRAB;       
+                        //12 is arg to mario_cutscene.c is for me is you
+                        gMarioState->actionArg = 1;
+                        o->oAction = 4;
+                    } else {
+                        play_sound(SOUND_OBJ_KOOPA_FLYGUY_DEATH, gGlobalSoundSource);   //not coins, poor mario
+                    }
+                    break;
+                }
+
+                case SHOP_EXPLAIN:
+                    shopkeeper_menu_hide();
+                    create_dialog_box(SHOPKEEPER_EXPLAIN_DIALOG);
+                    o->oAction = 3;
+                    break;
+
+                case SHOP_BYE:
+                    shopkeeper_menu_close();
+                    set_mario_npc_dialog(MARIO_DIALOG_STOP);
+                    o->oAction = 0;
+                    o->oInteractStatus = INT_STATUS_NONE;
+                    break;
+            }
+            break;
+
+            //mario reading
+        case 3: 
+            set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT);
+            if (!is_dialog_active()) {
+                shopkeeper_menu_show();
+                o->oAction = 2;
+            }
+            break;
+
+        case 4://mario dancing
+            if (!(gMarioState->action == ACT_FALL_AFTER_STAR_GRAB || gMarioState->action == ACT_STAR_DANCE_NO_EXIT || gMarioState->action == ACT_STAR_DANCE_EXIT || gMarioState->action == ACT_STAR_DANCE_WATER)) {
+                shopkeeper_menu_show();
+                o->oAction = 2;   //bo back
+            }
+            break;
+
+
+    }
+}

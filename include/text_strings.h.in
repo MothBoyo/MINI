@@ -68,6 +68,17 @@
 #define TEXT_VARIABLE_X _("×")
 #define TEXT_UNFILLED_STAR _("☆")
 
+#define TEXT_SHOP_TITLE     _("What do you want?")
+#define TEXT_SHOP_EXCHANGE  _("Exchange Coins")
+#define TEXT_SHOP_EXPLAIN   _("Explain Me")
+#define TEXT_SHOP_BYE       _("Bye")
+//colors
+#define TEXT_SHOP_PRICE_OPEN  _("(")
+#define TEXT_SHOP_PRICE_COINS _("10 $")
+#define TEXT_SHOP_PRICE_EQ    _("is ")
+#define TEXT_SHOP_PRICE_STAR  _("1☆")
+#define TEXT_SHOP_PRICE_CLOSE _(")")
+
 /**
  * Global Text
  */
