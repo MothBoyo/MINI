@@ -150,6 +150,11 @@ enum StarFlags {
     STAR_FLAG_LAST          = STAR_FLAG_ACT_100_COINS
 };
 
+#define ACT_AREA_NUM_ACTS      6 
+
+
+
+
 #define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 24) & 0x7F)
 #define STAR_FLAG_TO_SAVE_FLAG(cmd) ((cmd) << 24)
 
@@ -210,6 +215,8 @@ s32 save_file_get_course_blue_coins_count(s32 fileIndex, s32 courseIndex);
 s32 save_file_get_total_blue_coins(s32 fileIndex);
 u16 save_file_get_blue_coins_spent(s32 fileIndex);
 void save_file_set_blue_coins_spent(s32 fileIndex, u16 amount);
+
+u8 get_act_blue_coin_count(s32 levelNum, s32 actNum);
 
 #if MULTILANG
 enum EuLanguages {

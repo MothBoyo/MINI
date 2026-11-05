@@ -898,3 +898,31 @@ void save_file_set_blue_coins_spent(s32 fileIndex, u16 amount) {
     gSaveBuffer.files[fileIndex][0].blueCoinsSpent += amount; 
     gSaveFileModified = TRUE;
 }
+
+
+//table
+const u8 sActBlueCoinNumers[LEVEL_COUNT + 1][ACT_AREA_NUM_ACTS] = {
+    [LEVEL_BOB] = { 1, 2, 3, 3, 0, 1 },
+    [LEVEL_WF]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_JRB] = { 2, 1, 3, 0, 2, 1 }, //uwu
+    [LEVEL_CCM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_BBH] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_HMC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_LLL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SSL] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_DDD] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_SL]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_WDW] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_TTM] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_THI] = { 1, 2, 3, 3, 2, 1 },
+    [LEVEL_TTC] = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_RR]  = { 1, 1, 1, 1, 1, 1 },
+};
+
+//get blue coins per star to show
+u8 get_act_blue_coin_count(s32 levelNum, s32 actNum) {   // actNum 1 to 6
+    if (levelNum < 0 || levelNum > LEVEL_COUNT || actNum < 1 || actNum > ACT_AREA_NUM_ACTS) {
+        return 0;
+    }
+    return sActBlueCoinNumers[levelNum][actNum - 1];
+}

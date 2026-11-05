@@ -122,28 +122,6 @@ void render_100_coin_star(u8 stars) {
 #define COIN2_Y_POS_SELECT_SCREEN 110 + 10
 #define COIN3_Y_POS_SELECT_SCREEN 60 + 10
 
-#define ACT_AREA_NUM_ACTS      6 
-
-static const u8 sActBlueCoinNumers[LEVEL_COUNT + 1][ACT_AREA_NUM_ACTS] = {
-    [LEVEL_BOB] = { 1, 2, 3, 3, 0, 1 },
-    [LEVEL_WF]  = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_JRB] = { 2, 1, 3, 0, 2, 1 }, //uwu
-    [LEVEL_CCM] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_BBH] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_HMC] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_LLL] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_SSL] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_DDD] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_SL]  = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_WDW] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_TTM] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_THI] = { 1, 2, 3, 3, 2, 1 },
-    [LEVEL_TTC] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_RR]  = { 1, 1, 1, 1, 1, 1 },
-
-    // [LEVEL_XXX] = { ... },
-};
-
 
 
 void bhv_act_selector_init(void) {
@@ -211,7 +189,8 @@ void bhv_act_selector_init(void) {
 
             //u8 maxCoinsForThisAct = 3;// sActBlueCoinNumers[courseIndex][i];
             //u8 maxCoinsForThisAct = sActBlueCoinNumers[COURSE_NUM_TO_INDEX(gCurrCourseNum)][i];
-            u8 maxCoinsForThisAct = sActBlueCoinNumers[gCurrLevelNum][i];
+            //u8 maxCoinsForThisAct = sActBlueCoinNumers[gCurrLevelNum][i];
+            u8 maxCoinsForThisAct = get_act_blue_coin_count(gCurrLevelNum, i + 1);
 
             u8 flagsRow1 = save_file_get_blue_coins_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 0);
             u8 flagsRow2 = save_file_get_blue_coins_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum), 1);

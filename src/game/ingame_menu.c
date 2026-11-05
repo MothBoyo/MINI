@@ -1509,6 +1509,43 @@ void print_animated_red_coin(s16 x, s16 y) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+void print_animated_blue_coin(s16 x, s16 y, s32 collected) {
+    s32 globalTimer = gGlobalTimer;
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, x, y, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.2f, 0.2f, 1.0f);
+    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+
+    if (collected) {
+        switch (globalTimer & 0x6) {
+            case 0: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_blue_front     ); break;
+            case 2: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_blue_tilt_right); break;
+            case 4: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_blue_side      ); break;
+            case 6: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_blue_tilt_left ); break;
+        }
+    } else {
+        switch (globalTimer & 0x6) {
+            case 0: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_gray_front     ); break;
+            case 2: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_gray_front); break;
+            case 4: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_gray_front      ); break;
+            case 6: gSPDisplayList(gDisplayListHead++, coin_seg3_dl_gray_front ); break;
+        }
+    }
+
+
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
+//CUSTOM BLUE COINS
+#define PAUSE_BLUE_COIN_X 30
+#define PAUSE_BLUE_COIN_Y 36
+#define PAUSE_BLUE_COIN_UWU 24
+
+//this will also render blue coins now, amazing.
 void render_pause_red_coins(void) {
     s8 x;
 
@@ -1543,6 +1580,29 @@ void render_pause_red_coins(void) {
 
         gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
     }
+
+    //blue coins
+    s32 fileIndex = gCurrSaveFileNum - 1;
+    s32 courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
+    s32 act = gDialogCourseActNum;
+    u8 maxCoins;
+    s32 i;
+
+    //in case of red coins in hub :c
+    if (gCurrCourseNum < COURSE_MIN || gCurrCourseNum > COURSE_STAGES_MAX) {
+        return;
+    }
+
+    maxCoins = get_act_blue_coin_count(gCurrLevelNum, act);
+
+    //i coin i uwu
+    for (i = 0; i < maxCoins && i < 3; i++) {
+        u32 flags = save_file_get_blue_coins_flags(fileIndex, courseIndex, i); 
+        s32 collected = (flags & (1 << (act - 1))) != 0; //if loves me or loves me not!
+
+        print_animated_blue_coin(GFX_DIMENSIONS_FROM_RIGHT_EDGE(PAUSE_BLUE_COIN_X), PAUSE_BLUE_COIN_Y + i * PAUSE_BLUE_COIN_UWU, collected);
+    }
+
 }
 
 /// By default, not needed as puppycamera has an option, but should you wish to revert that, you are legally allowed.
