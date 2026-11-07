@@ -712,13 +712,20 @@ s32 act_in_cannon(struct MarioState *m) {
             break;
 
         case ACT_STATE_IN_CANNON_READY:
-            m->faceAngle[0] -= (s16)(m->controller->stickY * 10.0f);
-            marioObj->oMarioCannonInputYaw -= (s16)(m->controller->stickX * 10.0f);
 
-            m->faceAngle[0] = CLAMP(m->faceAngle[0], 0, DEGREES(80));
-            marioObj->oMarioCannonInputYaw = CLAMP(marioObj->oMarioCannonInputYaw, -0x4000, 0x4000);
 
-            m->faceAngle[1] = (marioObj->oMarioCannonObjectYaw + marioObj->oMarioCannonInputYaw);
+            //m->faceAngle[0] -= (s16)(m->controller->stickY * 10.0f);
+            //marioObj->oMarioCannonInputYaw -= (s16)(m->controller->stickX * 10.0f);
+
+            //m->faceAngle[0] = CLAMP(m->faceAngle[0], 0, DEGREES(80));
+            //marioObj->oMarioCannonInputYaw = CLAMP(marioObj->oMarioCannonInputYaw, -0x4000, 0x4000);
+
+            //m->faceAngle[1] = (marioObj->oMarioCannonObjectYaw + marioObj->oMarioCannonInputYaw);
+
+            //now just copy from ancnon
+            m->faceAngle[0] = m->usedObj->oMoveAnglePitch;
+            m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
+
             if (m->input & INPUT_A_PRESSED) {
                 f32 cosPitch = coss(m->faceAngle[0]);
                 m->forwardVel = 100.0f * cosPitch;
