@@ -1,7 +1,6 @@
 // cannon.inc.c
 
 /*
-note_ the entire yaw is rotate 90 degrees so when placing obhect in blender add 90 :P
 note 2 mode 2 is broken totally broken
 
 bparam1 = mode. 
@@ -62,6 +61,8 @@ void opened_cannon_act_idle(void) { // act 0
 void opened_cannon_act_rising(void) { // act 4
     if (o->oTimer == 0) {
         cur_obj_play_sound_2(SOUND_OBJ_CANNON_RISE);
+        o->oMoveAngleYaw = o->oCannonHomeYaw;
+
     }
 
     o->oPosY += 5.0f;
@@ -89,9 +90,9 @@ void opened_cannon_act_turning_yaw(void) { // act 6
     } else {
         if (o->oTimer >= 6) {
             if (o->oTimer < 22) {
-                o->oMoveAngleYaw =
-                    o->oMoveAngleYaw = o->oCannonHomeYaw + (s16)(sins(o->oCannonAngle) * 0x4000);
-                o->oCannonAngle += 0x400;
+                //o->oMoveAngleYaw =
+                //    o->oMoveAngleYaw = o->oCannonHomeYaw + (s16)(sins(o->oCannonAngle) * 0x4000);
+                //o->oCannonAngle += 0x400;
             } else if (o->oTimer >= 26) {
                 o->oCannonAngle = 0;
                 o->oAction = 5;
@@ -158,6 +159,7 @@ void opened_cannon_act_shoot(void) { // act 2
 void opened_cannon_act_resetting(void) { // act 3
     if (o->oTimer > 3) {
         o->oAction = 0;
+        o->oMoveAngleYaw = o->oCannonHomeYaw;
     }
 }
 
