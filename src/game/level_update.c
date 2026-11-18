@@ -1,3 +1,4 @@
+#include "texscroll.h"
 #include <ultra64.h>
 
 #include "sm64.h"
@@ -1198,7 +1199,7 @@ s32 update_level(void) {
 
     switch (sCurrPlayMode) {
         case PLAY_MODE_NORMAL:
-            changeLevel = play_mode_normal();
+            changeLevel = play_mode_normal(); scroll_textures();
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();
@@ -1234,7 +1235,7 @@ extern u32 gInitLevelTime;
 //0 = original warp dest
 static const u8 sActAreaTable[LEVEL_COUNT + 1][ACT_AREA_NUM_ACTS] = {
     [LEVEL_BOB] = { 1, 1, 1, 1, 1, 1 },
-    [LEVEL_WF]  = { 1, 1, 1, 1, 1, 1 },
+    [LEVEL_WF]  = { 1, 2, 3, 1, 1, 1 },
     [LEVEL_JRB] = { 1, 1, 1, 1, 1, 1 },
     [LEVEL_CCM] = { 1, 1, 1, 1, 1, 1 },
     [LEVEL_BBH] = { 1, 1, 1, 1, 1, 1 },

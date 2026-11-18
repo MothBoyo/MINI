@@ -75,3 +75,14 @@ Gfx *geo_skybox_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) 
 
     return gfx;
 }
+
+
+//moth:
+Gfx *geo_backdrop_move(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) {
+    if (callContext == GEO_CONTEXT_RENDER) {
+        ((struct GraphNodeTranslation *) node->next)->translation[0] = gLakituState.pos[0];
+        ((struct GraphNodeTranslation *) node->next)->translation[1] = gLakituState.pos[1];
+        ((struct GraphNodeTranslation *) node->next)->translation[2] = gLakituState.pos[2];
+    }
+    return 0;
+}
