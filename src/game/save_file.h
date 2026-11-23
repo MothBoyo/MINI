@@ -147,6 +147,7 @@ enum StarFlags {
     STAR_FLAG_ACT_5         = (1 << 4), // 0x10
     STAR_FLAG_ACT_6         = (1 << 5), // 0x20
     STAR_FLAG_ACT_100_COINS = (1 << 6), // 0x40
+    STAR_FLAG_ACT_8         = (1 << 7), // 0x40
     STAR_FLAG_LAST          = STAR_FLAG_ACT_100_COINS
 };
 
@@ -155,7 +156,7 @@ enum StarFlags {
 
 
 
-#define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 24) & 0x7F)
+#define SAVE_FLAG_TO_STAR_FLAG(cmd) (((cmd) >> 24)) //custom 8 STAR
 #define STAR_FLAG_TO_SAVE_FLAG(cmd) ((cmd) << 24)
 
 // Variable for setting a warp checkpoint.

@@ -530,7 +530,7 @@ s32 save_file_get_course_star_count(s32 fileIndex, s32 courseIndex) {
     u8 flag = 1;
     u8 starFlags = save_file_get_star_flags(fileIndex, courseIndex);
 
-    for (i = 0; i < 7; i++, flag <<= 1) {
+    for (i = 0; i < 8; i++, flag <<= 1) {
         if (starFlags & flag) {
             count++;
         }
@@ -603,7 +603,7 @@ u32 save_file_get_flags(void) {
  */
 #ifdef COMPLETE_SAVE_FILE
 u32 save_file_get_star_flags(UNUSED s32 fileIndex, UNUSED s32 courseIndex) {
-    return 0x7F;
+    return 0xFF; //new //custom 8 STAR
 }
 #else
 u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
@@ -612,7 +612,7 @@ u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
     if (courseIndex == COURSE_NUM_TO_INDEX(COURSE_NONE)) {
         starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
     } else {
-        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0x7F;
+        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex];  //custom 8 STAR
     }
 
     return starFlags;

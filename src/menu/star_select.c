@@ -90,25 +90,95 @@ void bhv_act_selector_star_type_loop(void) {
 /**
  * Renders the 100 coin star with an special star selector type.
  */
+#define MODEL_STAR_7                MODEL_RED_COIN //change when you have the models
+#define MODEL_STAR_7_UNCOLLECTED    MODEL_YELLOW_COIN //change when you have the models
+
+#define MODEL_STAR_8                MODEL_RED_COIN //change when you have the models
+#define MODEL_STAR_8_UNCOLLECTED    MODEL_YELLOW_COIN //change when you have the models
+
+#define EXTRA_STARS_BASE_X 200
+#define EXTRA_STARS_BASE_Y -100
+#define EXTRA_STARS_BASE_Z -100
+
+#define EXTRA_STARS_OFFSET_X 100
+
 void render_100_coin_star(u8 stars) {
     if (stars & STAR_FLAG_ACT_100_COINS) {
         // If the 100 coin star has been collected, create a new star selector next to the coin score.
+        //if the star 7 is collected
     #ifdef WIDE
         if (gConfig.widescreen) {
-            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                            bhvActSelectorStarType, (370 * 4.0f) / 3, 24, -300, 0, 0, 0);
+            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7,
+                                                            bhvActSelectorStarType, (EXTRA_STARS_BASE_X * 4.0f) / 3, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
         } else {
-            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                            bhvActSelectorStarType, 370, 24, -300, 0, 0, 0);
+            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7,
+                                                            bhvActSelectorStarType, EXTRA_STARS_BASE_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
         }
     #else
-        sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR,
-                                                        bhvActSelectorStarType, 370, 24, -300, 0, 0, 0);
+        sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7,
+                                                        bhvActSelectorStarType, EXTRA_STARS_BASE_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+    #endif
+
+        sStarSelectorModels[6]->oStarSelectorSize = 0.8f;
+        sStarSelectorModels[6]->oStarSelectorType = STAR_SELECTOR_100_COINS;
+    } else {
+        //if the star 7 is NOT collected
+    #ifdef WIDE
+        if (gConfig.widescreen) {
+            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7_UNCOLLECTED,
+                                                            bhvActSelectorStarType, (EXTRA_STARS_BASE_X * 4.0f) / 3, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        } else {
+            sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7_UNCOLLECTED,
+                                                            bhvActSelectorStarType, EXTRA_STARS_BASE_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        }
+    #else
+        sStarSelectorModels[6] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_7_UNCOLLECTED,
+                                                        bhvActSelectorStarType, EXTRA_STARS_BASE_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
     #endif
 
         sStarSelectorModels[6]->oStarSelectorSize = 0.8f;
         sStarSelectorModels[6]->oStarSelectorType = STAR_SELECTOR_100_COINS;
     }
+
+    //STAR 8 //custom STAR 8
+    if (stars & STAR_FLAG_ACT_8) {
+        //if the star 8 is collected
+    #ifdef WIDE
+        if (gConfig.widescreen) {
+            sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8,
+                                                            bhvActSelectorStarType, (EXTRA_STARS_BASE_X + EXTRA_STARS_OFFSET_X * 4.0f) / 3, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        } else {
+            sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8,
+                                                            bhvActSelectorStarType, EXTRA_STARS_BASE_X + EXTRA_STARS_OFFSET_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        }
+    #else
+        sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8,
+                                                        bhvActSelectorStarType, EXTRA_STARS_BASE_X + EXTRA_STARS_OFFSET_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+    #endif
+
+        sStarSelectorModels[7]->oStarSelectorSize = 0.8f;
+        sStarSelectorModels[7]->oStarSelectorType = STAR_SELECTOR_100_COINS;
+    } else {
+        //if the star 8 is NOT collected
+    #ifdef WIDE
+        if (gConfig.widescreen) {
+            sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8_UNCOLLECTED,
+                                                            bhvActSelectorStarType, (EXTRA_STARS_BASE_X + EXTRA_STARS_OFFSET_X * 4.0f) / 3, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        } else {
+            sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8_UNCOLLECTED,
+                                                            bhvActSelectorStarType, EXTRA_STARS_BASE_X + EXTRA_STARS_OFFSET_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+        }
+    #else
+        sStarSelectorModels[7] = spawn_object_abs_with_rot(o, 0, MODEL_STAR_8_UNCOLLECTED,
+                                                        bhvActSelectorStarType, EXTRA_STARS_BASE_X +  EXTRA_STARS_OFFSET_X, EXTRA_STARS_BASE_Y, EXTRA_STARS_BASE_Z, 0, 0, 0);
+    #endif
+
+        sStarSelectorModels[7]->oStarSelectorSize = 0.8f;
+        sStarSelectorModels[7]->oStarSelectorType = STAR_SELECTOR_100_COINS;
+    }
+
+
+
 }
 
 /**
@@ -169,6 +239,10 @@ void bhv_act_selector_init(void) {
     // Render star selector objects
 
 
+    //failsave
+    if (sVisibleStars > 6) {
+        sVisibleStars = 6;
+    }
 
 #ifdef WIDE
     if (gConfig.widescreen) {

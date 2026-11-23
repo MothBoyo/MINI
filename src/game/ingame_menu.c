@@ -1838,6 +1838,13 @@ void render_pause_castle_course_stars(s16 x, s16 y, s16 fileIndex, s16 courseInd
         print_generic_string(x + 89, y - 5, textStar);
     }
 
+    //custom STAR 8
+    if (starFlags & STAR_FLAG_ACT_8) {
+        starCount--;
+        print_generic_string(x + 89 + 12, y - 5, textStar);
+    }
+
+
     while (hasStar != starCount) {
         if (starFlags & (1 << nextStar)) {
             str[nextStar * 2] = DIALOG_CHAR_STAR_FILLED;
